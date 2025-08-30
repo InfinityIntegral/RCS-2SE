@@ -1,0 +1,45 @@
+Unit 1.0 - Code Compilation and Computer Architecture
+x86-64, ARM64, BLUR64, and compiling stuff
+
+CPU architecture
+The CPU is the part of the computer where your code runs. All CPUs are different (obviously), but they all follow a few instruction sets. The instruction sets determine what kind of binary code they can understand.
+You choose compilers based on the instruction set because you need to translate the C++ code to the correct machine code.
+
+CPU architecture
+In general, laptops and desktops use x86-64 instruction sets, mobile devices such as phones and tablet use ARM64.
+If your compiler compiles binary code for the wrong instruction set, then you cannot run it on your computer. Komputer tidak dapat memahaminya seperti bagaimana anda tidak dapat memahaminya. Different binary code look the same, but they are completely different.
+
+Compiling stuff
+So how does compiles translate your easy to read C++ into completely unreadable binary code? In general, the compiler follows these steps:
+preprocessing → tokenisation → AST generation → semantics → a huge amount of optimisations → linking
+
+Preprocessing
+You can insert lines of code starting with # called preprocessor directives. This allows the preprocessor, which is like a fancy find-replace combined with a fancy copy-paste, to make changes to the code.
+Some common preprocessor directives:#include <somelibrary.h>#define int long long (only in Olympiads pls)#define PLATFORM_IS_WINDOWS_LAH
+
+Tokenisation
+C++ code is just text… not great for seeing structure inside. During the tokenisation, the code is converted into tokens, which are like words for the compiler.
+Some tokens include brackets, semicolons, and even variable names. Custom defined variable names and function names are also known as symbols.
+std | :: | cout | << | “blur blur” | ;
+
+AST generation
+In the next step, the tokens are read by the compiler to create a abstract syntax tree. This makes it much easier to see structure, because the compiler can actually see which code is inside brackets, inside a block, etc.
+Some tools can pull the abstract syntax tree out halfway through compilation to help with debugging. This is what makes Qt Creator understand C++.
+
+Semantics Checks
+After the abstract syntax tree is generated, the compiler can perform semantics checks to see if a part of the tree makes sense. This is where it complains about syntax errors.
+int yourName = “Blur Blur”;
+That does not make sense because you cannot assign a string to a integer. So the compiler complains about it after it checks through the tree and finds this nonsense.
+
+Optimisations, a lot of them
+Now the compiler understands the code, it can translate it into machine code. This is done through many steps including first translating it to a in between language.
+At this step, the compiler performs optimisations for the code that you never bothered to do. It also adds stuff necessary for the code to work.
+
+Linking
+Now we have the binary code for 1 file, it is time for the linker to take over.
+The linker sees which symbols have missing definitions and attempts to find them in other files and link them together. If the symbol cannot be found, it complains about stuff not being defined. However, it would not complain if the undefined stuff is never actually used.
+
+Compiling done liao
+If everything is successful, the linker produces an executable (.exe), which you can click to run.
+However, if you did some nonsense like (*nullptr), the code may still compile and run, but it will crash. You must not be complacent and you must check your code carefully so that it does not randomly crash.
+Crashing is blur behaviour.
