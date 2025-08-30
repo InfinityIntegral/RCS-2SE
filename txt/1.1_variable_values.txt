@@ -1,0 +1,43 @@
+Unit 1.1 - Variables, Value Types, and Scope
+lvalue rvalue xvalue prvalue out-of-scope-undeclared-value
+
+Memory Storage
+The computer stores memory in what looks like a huge database. Accessing that would be very very annoying.
+C++ abstracts this for us by providing ways to create variables. A variable links a memory address to something that you can actually use in the programme. This allows you to ignore how the computer actually stores the data, the compiler handles that.
+
+Declaring variables
+Before using a variable, you must declare it by telling the compiler its type and name, and optionally, initialise it.
+Hi compiler, give me some memory to store a int → intWe can call that piece of memory “x” → xAssign 0 to that piece of memory first → = 0Done liao → ;
+int x = 0;
+
+Scope
+A variable can only be used after it is declared and only inside its scope. A scope is the part in between a pair of curly brackets {}.
+When the code execution point leaves the scope, it destroys the variable. This frees the linked memory for usage later. Without that, there would be memory leaks everywhere, which is when the memory is not freed and can no longer be used by your programme.
+
+Scope
+{    x = 1; ← not ok, before declaration    int x = 0; ← this is the declaration    x = 2; ← ok    int x = 3; ← not ok, cannot declare twice}x = 4; ← not ok, out of scope, memory gone liao
+
+lvalues
+Variables are also known as lvalues which means locator values. This is because they are linked to a piece of memory, so they locate that piece of memory.
+You can assign data to them, which physically changes the linked memory to reflect your data.
+
+Assigning to a lvalue
+To assign to a variable or lvalue:
+Hi compiler, find the lvalue with name “x” → xCan we assign something to it pls? → =We can put 0 there → 0Done liao → ;
+x = 0;(This assumes you already declared x and the type is ok)
+
+rvalues
+rvalues, or right side values, do not have a linked piece of memory. They are called right side values because they can only appear on the right side of assignment operations.
+This makes sense, because to assign data is to place that data in the memory linked to a variable. If it does not have a memory linked, it cannot be assigned to.
+rvalues can be literals or intermediate computation results.
+
+xvalues
+A xvalue was once a lvalue, but it got marked as a rvalue and can have its piece of memory stolen. If the memory is stolen, it becomes a rvalue because you cannot assign to it safely.
+In usual code you almost never need this.
+
+
+prvalues
+A prvalue is any rvalue that is not a xvalue.
+This includes literals (0, 0.5f, “blur blur”, etc) and intermediate results of expressions.
+Literals are literally data in the code. For example, 0 in your code literally means the number 0, and “blur blur” in your code literally means the string (or text) “blur blur”.
+You do not have to declare literals because they do not have associated memory to allocate.
