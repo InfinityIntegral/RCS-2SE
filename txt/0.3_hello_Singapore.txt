@@ -1,0 +1,30 @@
+Unit 0.3 - Hello, Singapore
+because hello world is boring
+
+So we can start coding?
+NO!
+We first need to set up a IDE.
+Pls do not use Notepad for coding, it does not even have undo redo functionality or line wrapping… That is exceptionally blur…
+
+Integrated Development Environments
+An IDE is a fancy text editor that you use to write code. It does all the normal text editor stuff including find-replace and undo-redo. It also understands your code and can compile it for you.
+Imagine Google Docs, but it is linked to a compiler, and it understands C++. You can even use a custom font such as SingScript.sg
+
+Qt Creator - a warning
+Qt Creator crashes often, so save your work frequently by pressing ctrl + S
+Qt Creator uses Qt’s complicated compilation process so it will not be able to compile your code automatically. It does have a cmd included, so that is convenient for you to write compilation commands yourself.
+
+Hello, Singapore
+With Qt all set up, open a blank text file called test.cpp and copy paste the code below:
+#include <iostream>int main(){    std::cout << “Hello, Singapore”;}
+
+Compiling the code
+Next, ask the compiler nicely to compile the code.
+Hi, g++ compiler interface, → g++can you output a file for me pls? → -oCall that file test.exe, → test.exeand use the source code from test.cpp, → test.cpp
+BlurBlur>g++ -o test.exe test.cpp
+
+Running the code
+If you copied the code correctly, g++ would have made a new file called test.exe
+Now you ask test.exe to run itself. Since it is an executable file (.exe), it knows what to do.
+BlurBlur>test.exe
+You can see the output appearing in the Qt Creator’s cmd
