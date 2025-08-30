@@ -1,0 +1,118 @@
+Unit 0.2 - Why C++?
+C++ is not blur… or at least less blur than others
+
+Programming languages?
+From the official definition, a programming language must have syntax, semantics, whatever… That is way too complicated. For the purposes of this unit,
+A programming language is something that can convey information in a computer friendly way (it has syntax).
+Now we can try to pick a programming language to code in.
+
+HTML
+CSS
+XML
+JSON
+YAML
+Markdown
+C
+C++
+C#
+Java
+Python
+JS (JavaScript)
+TS (TypeScript)
+PHP
+Ruby
+Go
+Rust
+Swift
+Kotlin
+Lua
+Perl
+Bash
+SQL
+regexp
+GLSL
+HLSL
+R
+MATLAB
+ASM
+
+How to decide?
+Can it count primes?
+On my computer?
+Without being too slow?
+And be easy to code in?
+
+Can it count primes?
+Because our definition of programming language is really loose, a lot of them are just ways to represent data.
+You cannot run computations in them.
+You cannot make HTML compute, the same way you cannot make a Google Docs document decide if 91 is a prime number.
+
+C
+C++
+C#
+Java
+Python
+JS (JavaScript)
+TS (TypeScript)
+PHP
+Ruby
+Go
+Rust
+Swift
+Kotlin
+Lua
+Perl
+Bash
+GLSL
+HLSL
+R
+MATLAB
+ASM
+
+On my computer?
+General purpose programmes compute on the CPU and should be cross platform. This means that they, with the correct compiler, should run on Windows, Android, iOS, even Arduino.
+GLSL and HLSL run on the GPU, so although they are powerful, they cannot be directly used to build apps. However, these are useful for shaders that display stuff inside apps.
+
+C
+C++
+C#
+Java
+Python
+JS (JavaScript)
+TS (TypeScript)
+PHP
+Ruby
+Go
+Rust
+Swift
+Kotlin
+Lua
+Perl
+Bash
+R
+MATLAB
+
+Without being too slow?
+Many languages including Python and JS are not compiled to machine code. They are compiled to something that a special application, the interpreter, can run.
+This means that instead of your code being run, the interpreter runs and your code runs on top of it. That is soooooooooooooooooooooooooooooooo slow.
+If the user does not have the interpreter, they would not run at all.
+
+Without being too slow?
+Some interpreted languages such as C# can use special compilers that first translate them to a compiled language, then compile the generated code to machine code.
+However, that makes compiling really slow.
+So unless you want to wait for 5 hours for your programme to compile, it is best to avoid interpreted languages altogether.
+
+Only 5 left
+Go
+C++
+Swift
+C
+Rust
+
+And be easy to code in?
+Go and C both do not have class inheritance, which is really important in complicated apps to avoid copy pasting the exact same code everywhere.
+Rust is designed to be safe C++. It prevents crashing (supposedly), but is really complicated to code in.
+You can technically use Swift everywhere, but support is not great outside of Apple.
+
+That leaves 1 option
+C++
