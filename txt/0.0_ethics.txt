@@ -1,0 +1,50 @@
+Unit 0.0 - Ethics, Singaporean values, and we-first society
+Every computer course has a ethics module
+
+The power of computing
+A computer can run 10^9 operations per second.That is many times faster than what you can calculate.
+10^9 = 1 000 000 000
+With so much computational power, it must be used responsibly and ethically. The use of computers must follow moral values and the law. In this course, moral values will refer to values promoted by MOE Singapore. 
+
+Sincerity (integrity)
+When describing your computer programmes, you must say exactly what it does. You should not overstate its capabilities or collect user data without permission.
+So, pls do not have random buzzwords in READMEs, and do not violate PDPA (Personal Data Protection Act). Note that if you have a server (not covered in this course), you must take extra precautions.
+
+Independence (includes perseverance)
+When you do not know how to do something, do not give up. Instead you can look at documentation, ask ChatGPT (but DO NOT ask ChatGPT to write code for you), or search in online forums.
+You should not rely on someone else to build your project for you. If you do that, it would no longer be your project.
+
+Nation Loving
+Your computer programmes should not act against national interests and national values.
+You definitely should not create software for the purpose of bypassing laws, especially bypassing censorship. The government censors information for a reason.
+(Government refers to the Singapore government, Canadian government is a group of blur blurs)
+
+Gratitude (paying it forwards)
+You are only able to create computer programmes by using the work of programmers before you. You cannot code if you do not have your operating system, the C++ language, the compiler, your IDE, the Internet (to download software), the computer hardware itself, etc…
+You should contribute to the programming community by making your code open source and sharing it on publicly accessible websites such as GitHub.
+
+(Learning / Working) Attitude
+You should make your programme the best possible within your hardware, knowledge, and time constraints. If a programme is meant for public use, test it thoroughly and ensure that it does not lose user data or crash randomly.
+If possible, keep old work that you have done updated with optimisations, bug fixes, and the latest dependencies.
+
+Positivity
+You write software to improve things, to make things easier to do, so keep everything positive. Do not use inappropriate language, because you would not want your GitHub repository to look like wm4’s commit messages on mpv-player.
+If some software is frustrating, write code to abstract it or replace it. Only then you can complain about it.
+QML is blur.
+
+Optimisation
+Never heard of a primary school with this in core values…
+You do not want your programme to run as fast as VS Code or Discord desktop version though.
+In programming, optimisation is very important to ensure that whatever you code is usable. You should analyse time complexity (do not use linear search when you can use binary search) and pick the right tools (C++ for language).
+
+Responsibility
+You are responsible for whatever software you distribute online. If you find a bug or if you get a bug report from someone and you can verify the bug exists, pls fix it.
+Make it as easy as possible for users to report bugs. Having a bug report feature on the downloads page would be excellent, having one in the application itself would be even better.
+
+Excellence (includes everything above)
+So, build whatever you need, as well as you can.
+May the good we achieveAs one nationBe shared with the world(My People My Home, NDP 1995)
+
+We-first society
+During the National Day rally 2025, PM Wong emphasised the importance of having a we-first society.
+This is important to remember in programming. Whatever we code should be for the benefit of others, specifically the users. You should not code something just to earn money from it. Even if you need to charge users to cover operations cost, do it reasonably.
