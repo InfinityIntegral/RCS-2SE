@@ -1,0 +1,36 @@
+Unit 0.1 - Setting up compiler
+Make the computer not blur
+
+Why a compiler?
+C++ code is very easy to read, but it cannot be executed quickly by the CPU because the CPU expects a binary executable file.
+If this is not done, you would need JIT (just in time) compilation. Imagine doing all your homework in Malay and having to look up every word in a dictionary before doing each question.
+
+Which compiler?
+Different CPUs and different operating systems use different compilers because they understand different forms of binary code. There are also many brands of compilers.
+For this course, we will be using LLVM-MinGW.
+This compiler has cross platform releases. Cross platform means that it works on different operating systems.
+
+Downloading the compiler (Windows)
+Go to the websitehttps://github.com/mstorsjo/llvm-mingw/releasesto get your compiler.
+Windows: llvm-mingw-20250826-ucrt-x86_64.zip
+Always use latest version even if it is not 20250826
+
+Downloading the compiler (MacOS)
+Run xcode-select --install in cmd
+Technically it is called the Terminal in MacOS, but we will call the command line cmd for simplicity.
+
+Downloading the compiler (Linux)
+Use your package manager
+Ubuntu: sudo apt update then sudo apt install g++Fedora: sudo dnf install gcc-c++Arch: sudo pacman -S gcc
+If you use Linux, you should know these already.
+
+Adding to PATH
+You can now unzip the folder you downloaded and move it out of the Downloads folder.
+Find the subfolder bin (binary)
+You access the compiler through g++ located in this subfolder. Writing the full path of the folder every time is annoying, so we can add the whole bin folder into PATH.
+DO NOT DELETE EXISTING STUFF IN PATH
+
+testing the compiler
+run g++ --version in cmd
+If it says anything other than application not found, your compiler is ready.
+You will learn more about compilers later.
