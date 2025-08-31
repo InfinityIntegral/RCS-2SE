@@ -1,0 +1,43 @@
+Unit 1.6 - Type Casting
+Making a float into a int… oh NaN…
+
+static_cast
+static_cast converts between types using instructions pre defined by the C++ standard. These instructions aim to convert between types while preserving original meaning as much as possible.
+For example, converting between numerical types keep the number as close to the original as possible, and converting between pointer types does not actually change the byte data.
+
+static_cast
+Hi compiler, I want to use static_cast → static_castI want to get to a float → <float>And I want to use it on the variable x → (x)
+static_cast<float>(x)
+In actual code:float y;int x = 0;y = static_cast<float>(x);
+
+reinterpret_cast
+Pointers are memory addresses, which are essentially numbers, the same way how HDB blk numbers are numbers. However, you cannot compare them directly to see which is bigger or smaller.
+Usually, comparing pointers does not make sense, the same way as saying blk 151 is bigger than blk 101 does not make sense. Blk 101 (Chong Pang) is actually bigger in physical area than blk 151 (Yishun Central).
+
+reinterpret_cast
+However, some APIs use pointer comparison to sort things. Then you can use reinterpret_cast to cast a pointer to a uintptr_t for that comparison.
+int x = 0;int* y = &x;uintptr_t z = reinterpret_cast<uintptr_t>(y);
+Now z can be used for comparison.
+
+Fun fact
+I know of only 1 API used to build a component of custom renderers in Qt Quick that uses pointer comparison, which is why reinterpret_cast is included.
+So, yes, the past 2 slides exist to prepare you for a single very advanced functionality in the Qt Quick rendering system. However, if you want to build renderers, you will need it.
+
+bit_cast
+Everything is stored in bytes, so what if you can just transfer bytes around instead of following proper types?
+That is what bit_cast is for.
+As long as 2 types occupy the same number of bytes and they all have default constructors and destructors, you can bit_cast between them. Note that the data would very likely appear nonsensical if interpreted normally.
+
+bit_cast
+int x = std::bit_cast<int>(-0.0f);
+Now x has a value of -2^31How? Because both the float value of -0 and the int value of -2^31 have the same bit pattern of10000000000000000000000000000000
+bit_cast can be helpful for casting stuff into char (which functions as bytes) to be written into files.
+
+const_cast
+A variable (more precisely, a lvalue), can be marked as const to indicate that it cannot and should not be modified after initialisation. lvalues can also be marked as volatile to indicate they can change randomly, typically because they are being controlled by hardware such as sensors.
+const_cast can be used to add and remove the const and volatile modifiers from variables. This can help with interfacing with old code that do not have these modifiers.
+
+const_cast
+Even if you used const_cast to remove the const modifier from a const lvalue, you still cannot modify it. That would be undefined behavior.
+Undefined behaviour is blur. -- C++ Standard
+Not ok:const int x = 0; ← x is const, cannot be modifiedint* y = const_cast<int*>(&x); ← const modifier removed(*y) = 1; ← cannot modify const int, not ok
