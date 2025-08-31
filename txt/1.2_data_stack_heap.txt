@@ -1,0 +1,48 @@
+Unit 1.2 - Data, Stack, Heap, and how to use them
+give me memory? which memory?
+
+Memory storage
+Computer programmes always use memory, that is what you see when you open Task Manager.
+For easier usage, the memory (like a huge database of bytes) they use is divided into 4 sections.- code / text- data- stack- heap
+
+Code segment
+To run code, the computer needs to know what code to run (obviously), so it loads that binary code into memory.
+This is the code segment, it is read-only, and we do not really have to care about what happens here because we literally cannot change it
+
+Data segment
+Global and static variables are loaded in the data segment. Because you cannot declare new global or static variables, the amount of memory they need does not change.
+So the compiler, very conveniently, pre allocates that memory. To allocate memory means to link a piece of memory to a variable.
+We can assign to and read from that memory.
+
+Data segment
+Global and static variables are helpful when you want to share something across many parts of the programme and there can only be one of that thing.
+For example, the score of a game, the theme colours of your application, and even the user’s name all can be global or static variables.
+Variable declaration rules still apply except there is literally no way to go out of scope.
+
+The Stack
+The stack is a piece of memory used for variables you declare inside functions. The compiler manages it by deleting variables when they go out of scope. This frees up memory but makes it not ok to access variables out of scope.
+These are all stored in the stack:bool amIBlur = false;int* someNumber = nullptr;int x = 0;
+
+The Stack
+Some variables such as std::string (stores text) and std::vector (stores a list of something) are heap allocated.
+This means whatever they contain are on the heap. The variable itself is on the stack and tells the compiler where to find the data from the heap.
+The compiler manages everything in this case, so we can pretend the whole thing is on the stack.
+
+Stack Overflow
+The stack is good, but it is quite small. On iOS, its size is only 512kB. That is only enough to store about 175 PSLE essays.
+If you try to allocate memory beyond the stack capacity, you get a stack overflow error. The programme crashes.
+Crashing is blur -- Cher Tianle
+
+The Heap
+Suppose I want to store 176 PSLE essays in my programme.
+The stack is too small for that, so we need something bigger, a lot bigger, like 1000x bigger.
+That is the heap, another memory space. Even on iOS, its size is 512MB, about enough for 175000 PSLE essays.
+That is enough to store the essays of all PSLE students in the past 4 years on a single iPhone programme’s heap.
+
+Managing the heap
+The compiler does not manage the heap for you because it does not know how long to keep stuff there for. Heap variables also cannot be declared directly and must be declared using the new keyword.
+Each declaration must be followed by a destruction using the delete keyword somewhere in the code.
+
+Managing the heap
+SomeClass* x = new SomeClass(); → declare on heapdelete x; → free the heap memory
+Note that here x is a pointer. We will learn more about these later. For now, just know that x stores an address that points out where in the heap the data is actually stored.
