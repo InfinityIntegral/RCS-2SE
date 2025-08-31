@@ -1,0 +1,118 @@
+Unit 1.5 - Primitive Types
+unsigned long long int
+
+Primitive Types
+Primitive types are the types that exist in C++ without including any library. These include mostly numbers and stuff that looks like numbers. They are all really small and can be passed by value without performance concerns.
+We will only look at the ones you actually need.
+
+Primitive Types
+Any type in C++, including primitive types, can be made into a reference, const reference, or pointer.
+However, since void does not have data, it cannot be made into a reference or const reference. A pointer to void means a pointer to any type (type unknown), not literally a pointer to something of type void.
+
+Precision and bounds
+Types representing numbers have a precision and bounds. This means that they are slightly inaccurate especially when dealing with really large numbers, though that inaccuracy is usually not noticeable. Large numbers that exceed bounds can cause other weird effects such as overflow.
+These exist because the amount of memory used to store the data is finite.
+
+void
+int
+unsigned int
+bool
+char
+long long
+unsigned long long
+float
+double
+__int128
+short
+unsigned short
+
+void
+void is a placeholder type for when you do not have anything. It is only used as the return types of functions that do not return anything.
+There can be no instance of void, otherwise it would not be void.
+A void* (pointer to void) indicates that the pointer points to something of unknown or unspecified type.
+
+bool
+A bool, or boolean, is a type that stores either true or false. It is used in if statements.
+Although it only needs a single bit, bools always take up 1 byte (8 bits) of memory. This is so that they can be read and written more easily by computers.
+
+char
+A char, or character, is a C++ type that stores 1 ASCII character. Chars are great for Singlish, English, or Malay apps, but you need QChar for other languages.
+A more common use of char is to represent a byte, not literally a text character.
+Chars occupy 1 byte (8 bits) each and can have 256 total possible values.
+
+char literals
+Char literals represent single text characters such as ‘a’ or ‘z’. They are commonly used to check if a string (text) is alphanumeric, lowercase, or uppercase.
+Examples of such checks and operations:(i >= ‘a’ && i <= ‘z’) ← lowercase(i >= ‘A’ && i <= ‘Z’) ← uppercasei += (‘A’ - ‘a’); ← capitalise
+
+char signedness
+A char can be signed or unsigned depending on what operating system you are compiling for and what compiler you use.
+Overflow for unsigned char is well defined, this means that you do not have to worry about (‘A’ - ‘a’) being negative. For most text processing operations, char works perfectly 
+
+int
+An int, or integer, is signed. This means that it can be either positive or negative. If it is positive, its bit representation is just the number itself in binary. If it is negative, its bit representation is 2^32 added to the number, in binary.
+This method of encoding ints is called 2’s complement.
+
+int bounds
+On essentially all platforms, ints have a size of 4 bytes, or 32 bits each. This means that they can represent any integer between -2^31 and 2^31 - 1 inclusive.
+If you go beyond that range, integer overflow occurs. During that, 2^32 is added to or subtracted from the int until it is within the acceptable range. This is technically undefined behaviour, so although it almost always works, it is best to cast it to unsigned int first.
+
+int examples
+0x00000000000000000000000000000000 = 00x00000000000000000000000000000001 = 10x00000000000000000000000000011010 = 260x11111111111111111111111111111111 = -10x11111111111111111111111111111110 = -20x11111111111111111111111111100110 = -260x01111111111111111111111111111111 = 2^31 - 10x10000000000000000000000000000000 = -2^31
+
+unsigned int
+An unsigned int, sometimes known as a uint, is unsigned. This means that it can only be positive. Similar to a int, it also occupies 4 bytes (32 bits). Since it is unsigned, it can represent all integers between 0 and 2^32 - 1 inclusive.
+Unsigned int overflow is well defined. This means that if an unsigned int exits the acceptable range, 2^32 is added to or subtracted from it until it gets back in the range.
+
+Other integer types
+Other integer types include short, unsigned short, long long, and unsigned long long.
+short = int but 2 bytes (16 bits)unsigned short = unsigned int but 2 bytes (16 bits)
+long long = int but 8 bytes (64 bits)unsigned long long = int but 8 bytes (64 bits)
+__int128 = int but 16 bytes (128 bits)
+
+long long? what?
+So why is long long not called long?
+There is actually an integer type called long, but it is 4 bytes (32 bits) long, same as a int, on almost all operating systems.
+Therefore there is no need to learn it because you can just use a long instead.
+
+float
+A float, or floating point number, is essentially scientific notation in binary. It follows a format called IEEE 754.
+The float occupies 32 bits. The first bit is called the sign bit, the next 8 bits are the exponent, and the last 23 bits are called the mantissa.
+
+floating point sign bit
+x ________ _______________________
+The sign bit determines if the number is positive or negative. A sign bit of 0 means that the number is positive, and a sign bit of 1 means that the number is negative.
+
+floating point exponent
+_ xxxxxxxx _______________________
+The exponent is similar to the exponent on top of 10 used in scientific notation. However, this time, the exponent is a power of 2.
+127 is subtracted from the exponent as a binary number before it is used. This is so that negative exponents for numbers between -1 and 1 can be reached.
+
+floating point mantissa
+_ ________ xxxxxxxxxxxxxxxxxxxxxxx
+The mantissa is the in front part of a number in scientific notation. It uses 23 bits to get a lot of precision.
+The mantissa is normalised so that it can only be between 0 and 1, and 1 is added to it before it is used in computation.
+
+calculating a float
+Floating point number= (-1)^(sign bit) x (1 + (mantissa / 2^23)) x 2 ^ (exponent - 127)
+However, if the exponents bits are all 0, the float is denormalised. It gives up relative precision to go smaller.
+Denormalised floating point number= (-1)^(sign bit) x (mantissa / 2^23) x 2^-126
+
+special cases
+0 00000000 00000000000000000000000 = + 01 00000000 00000000000000000000000 = - 0
+0 11111111 00000000000000000000000 = + infinity1 11111111 00000000000000000000000 = - infinity
+If the exponent is all 1 but the mantissa is not all 0, then the number is NaN, which is essentially the float equivalent of your calculator’s MATH ERROR.
+
+double
+A double is like a upgraded float. It has 11 bits of exponent and 52 bits of mantissa.
+In addition to the 1 sign bit, a double occupies 64 bits, or 8 bytes in total, double that of a float.
+
+floating point precision
+Floating point numbers have a fixed relative precision, which means that the percentage error is always not too bad. However, the absolute precision varies a lot.
+At large numbers, floats are very imprecise, even less precise than integers. Mixing float and int at large numbers can cause a bug known as floating point imprecision.
+
+Fun fact
+A video game kind of popular in Singapore called Minecraft has a lot of cubes using integer coordinates. However player movement uses floating point numbers…
+At distance 2^24 from the center of the game world, the rendering breaks and renders only the cubes in even number coordinates.
+
+ya, they are blur
+2^24 = 16777216
