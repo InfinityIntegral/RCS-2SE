@@ -1,0 +1,123 @@
+Unit 1.3 - Passing value, const ref, reference, and pointer
+every optimisation matters
+
+Functions
+Functions are pieces of code that do something. They can take inputs known as arguments which are substituted into function variables which are called parameters. Providing a function with input is called passing arguments.
+func(1); ← passing 1 as argument to function func
+
+An example
+void func(int x){ ← this is a function taking input as a int    std::cout << x; ← it does something with the int}
+You can use the function like this:func(0);This passes the argument 0 into the function func. Using a function is known as calling a function.
+
+Passing by value
+If we look at how the function was declaredvoid func(int x)
+Note that x has type int. This means that the memory that x is linked to stores a int, or a integer. Suppose we have another variable y also of type int.
+We can call func to do something with the data in y.func(y);
+
+Passing by value
+The function func needs to somehow get the data in y into the parameter x so that it can be used.
+By default, C++ passes it by value. This means that a copy of the data in y is created in another piece of memory. That piece of memory is then linked to x, allowing x to access the data.
+
+y
+726
+x
+
+y
+726
+data copied to another memory location
+x
+726
+
+x
+y
+726
+726
+
+Passing by value
+Since x and y have separate pieces of memory, modifying x in the function does not affect y. These 2 variables are not related in any way.
+Because passing by value minimises unintended results, it is the safest and C++ uses it by default.
+Note that each time data is copied, more memory is allocated.
+
+x
+y
+726
+0
+x is modified in the function
+y remains the same
+
+Passing by const reference
+If you change the declaration of func tovoid func(const int& x)(note the const keyword and the & sign)
+Now calling func on y will pass y by constant reference. For an integer, this does not matter. However for bigger types such as strings, passing by const ref does not need to copy data, so it reduces memory usage and can be much faster.
+
+y
+726
+x
+
+y
+726
+x
+const
+
+Passing by const reference
+Since x now is of type const int&, it cannot be modified due to the const keyword.
+We do not have to worry about accidentally modifying y when we change the value of x in the function, because it is not possible to change the value of x. If you try to assign to x anyways, the compiler will complain.
+
+y
+726
+x
+const
+cannot be modified
+
+Passing by reference
+If you change the declaration of func tovoid func(int& x)(note the & sign)
+Calling func on y would pass y by reference. This means the same piece of memory linked to y is now also linked to x. This is fast as it does not copy anything or allocate extra memory.
+
+y
+726
+x
+
+y
+726
+x
+
+Passing by reference
+If you now change the value of x inside the function, you change y too because they link to the same memory.
+This can be used to send multiple pieces of data out of functions by passing arguments by reference and modifying the arguments within the function.
+
+y
+0
+x
+modifying x changes y
+
+Passing by pointer
+If you change the declaration of func tovoid func(int* x)(note the * sign)
+Calling func on y passes y by pointer. This means that x receives the memory address of y and thus can modify y directly by writing to the dereferenced memory address.
+
+y
+726
+x
+
+y
+726
+x
+0x26A7
+
+Passing by pointer
+You can modify y by dereferencing x and assigning to that memory location. This directly modifies the data in the piece of memory associated with y.
+In code, this looks like(*x) = 0; ← * dereferences x into a int&
+Note that the result of a pointer dereference is a reference which can be assigned to as if it was passed by reference.
+
+y
+0
+x
+0x26A7
+
+Passing by pointer
+Usually, optional features in a function such as error checking take parameters passed by pointer. If you do not want to use the feature, you can pass in nullptr. References cannot be null, but pointers can use nullptr, which is why pointers are used instead of references.
+Internally, the function will detect if the thing passed in is nullptr and will skip the feature if it is.
+
+y
+726
+x
+0x0000
+“do not change y, I do not need it”

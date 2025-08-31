@@ -1,0 +1,74 @@
+Unit 1.4 - Pointers on the Heap and common bugs
+new delete new delete new delete delete crash liao
+
+The Heap - a review
+The heap is a segment of memory that must be managed manually. You can use the new keyword to create new variables here and use the delete keyword to free the memory. You cannot use a variable after its memory is freed.
+SomeClass* x = new SomeClass(); ← allocate on heapdelete x; ← free the memory
+
+Allocating on the heap
+Hi compiler, I would like a pointer variable to a variable of type SomeClass that stores its location → SomeClass*We can call that pointer x → xLink it to something on the heap pls → = newMake the thing on the heap → SomeClass()Done liao → ;
+SomeClass* x = new SomeClass();
+
+Freeing heap memory
+Hi compiler, I would like to free heap memory → deleteI would like to free the heap memory linked to x → xDone liao → ;
+delete x;
+The memory at location x is freed so you cannot dereference x, but x itself which is a pointer still exists. You should set x to nullptr in case you accidentally dereference it.
+
+Memory Leaks
+A memory leak happens when memory allocated on the heap is never freed. That piece of memory cannot be used again in the programme. If this is severe, the programme may run out of memory and crash.
+Crashing is blur -- Cher Tianle
+
+Forgetting to delete
+The main cause of memory leaks is forgetting to delete something. You must make sure that every new eventually results in a delete, which can actually get quite complicated.
+Technically you do not need to delete stuff at the end of the programme, but it is best practise to do it anyways, in case the operating system is blur.
+
+Losing a pointer
+If you assign to a pointer variable that already contains a pointer to memory on the heap, that pointer is lost. If a pointer is lost, there is no way to delete the associated heap memory.
+Your code logic must ensure that pointers are not lost. This can be done by checking if a pointer variable is nullptr before assigning to it.
+
+Losing a pointer
+SomeClass* x = new SomeClass(0);x = new SomeClass(1);delete x;
+The memory containing SomeClass(1) is freed but not the memory containing SomeClass(0). There is no way to free the memory containing SomeClass(0) now, so that memory is leaked.
+
+Nullptr Dereferencing
+Nullptr dereferencing happens when you try to dereference a nullptr. This means that you try to get the memory location that a nullptr points to, which is invalid.
+If this happens, the programme crashes.
+Crashing is blur -- Cher Tianle
+To avoid this, check if something is nullptr before dereferencing it.
+
+Nullptr Dereferencing
+SomeClass* x = nullptr;std::cout << (*x);
+x contains nullptr. When you attempt to get the value of (*x), you dereference it. That crashes the programme.
+Instead, check for nullptr before dereferencing.
+if(x != nullptr){std::cout << (*x);} ← check for nullptr
+
+Undefined behaviour
+Undefined behaviour refers to when the compiler assumes something would not happen because letting it happen is blur and programmers are not blur.
+When undefined behaviour happens, the code can behave as normal, randomly crash, or even output “You are blur”.
+You should always avoid undefined behaviour while programming.
+
+Use After Delete
+A use after delete bug occurs when you try to dereference a pointer pointing to heap memory that is already freed. It sometimes appears to work and sometimes reads back nonsense.
+Use after delete is undefined behaviour. Most of the time it appears to work, so you do not even know there is a bug.
+Undefined behaviour is blur. -- C++ Standard
+
+Use After Delete
+SomeClass* x = new SomeClass();delete x;std::cout << (*x);
+Using x is not ok because the associated memory is already freed. If the physical bytes have not been used yet, the same data remains, which is worse than crashing as you do not know there is a bug.
+
+Use After Delete
+To avoid use after delete, set pointer variables to nullptr after freeing the heap memory. If any use after delete bug exists, it becomes nullptr dereferencing and is much easier to catch as that would crash the app.
+SomeClass* x = new SomeClass();delete x;x = nullptr; ← set to nullptr after deletion
+
+Double Delete
+The double delete bug is very similar to the user after delete bug, except here you attempt to free heap memory that is already freed, instead of dereferencing it.
+Double delete is also undefined behaviour. Sometimes it works, sometimes it crashes.
+Undefined behaviour is blur. -- C++ Standard
+
+Double Delete
+SomeClass* x = new SomeClass();delete x;delete x; ← already freed, cannot free again
+This looks simple to find, but it can become annoying once you have if else branches and only some branches delete the variable and others do not.
+
+Double Delete
+SomeClass* x = new SomeClass();delete x;x = nullptr;delete x;
+This can be avoided by setting pointer variables to nullptr after freeing the associated heap memory. Deleting nullptr does nothing and is completely safe.
