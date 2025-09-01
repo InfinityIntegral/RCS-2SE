@@ -1,0 +1,59 @@
+Unit 1.10 - Loops
+while(true){std::cout << “do not be blur”;}
+
+while loops
+A while loop can be used to run the same piece of code many times.
+while loops have a condition and a code block attached. When the condition is true, the code block runs. Running the block of code once is called an iteration. After each iteration, the condition is checked again and the code block is run again if it is true. If the condition becomes false, the loop ends.
+
+while loops
+int i = 0; ← i starts at 0while(i < 100){ ← as long as i is lesser than 100    i++; ← add 1 to i}
+1 will be added to i until i reaches 100 because the condition, i < 100, will keep being true. When i reaches 100, the condition becomes false and the loop ends. In total, 100 iterations will be run.
+
+for loops
+for loops also have a condition and a code block attached. In addition to that, they have a initialisation operation and a increment operation.
+The syntax:
+for(initialisationOperation; condition; incrementOperation){code block}
+
+for loops
+The initialisation operation is run before the first iteration starts. Before every iteration, the condition is checked. If the condition is true, the code block is run. Otherwise, the loop ends. The increment operation is run after every iteration.
+Typically, the initialisation operation declares a variable. That variable is called the index. Usually, the increment operation adds 1 to the index, and the condition checks if the index is within a certain range.
+
+for loops
+for(int i=0; i<100; i++){    std::cout << i;}
+This for loop initialises by making a variable i starting at 0. It is sent to std::cout every iteration and incremented after that. This continues until i reaches 100 and the loop ends. In total, 100 operations will be run, printing the numbers 0 to 99.
+
+a note about scope
+Each loop has a round bracket part and a curly bracket part (the code block). Note that variables declared in the round bracket part uses the curly bracket part as their scope.
+for(int i=0; i<100; i++){    i++; ← the scope of i is here}i++; ← out of scope access, not ok
+
+break and continue
+The break keyword can be used to end a loop early without the loop’s condition being false. Note that this skips the remaining part of the iteration.
+The continue keyword skips the remaining part of a iteration and directly moves to the next iteration of a loop. If the condition is false, it ends the loop.
+
+
+repeating stuff
+A common pattern used in for loops is
+for(int i=0; i<n; i++)
+where n is a integer. This runs the code block attached n times, and the index i goes from 0 to n - 1.
+If you want i to go from 1 to n, do this instead.
+for(int i=1; i<=n; i++)
+
+repeat until break
+Another common pattern is
+while(true)
+Inside the loop, something uses the break keyword to exit the loop. This can be done when processing has completed. Without explicitly breaking it, the while loop will keep running forever.
+
+repeat until break
+In programmes that interfaces with hardware, this pattern is even more common.
+The loop runs on repeat while waiting for signals from the hardware. When a signal is received, the loop breaks and the code after the loop does processing of the signal.
+Note that this is very not power efficient, using interrupts is better.
+
+infinite loops
+If you mess up a loop condition and it can never become false, and nothing inside uses the break keyword to end the loop, a infinite loop is formed.
+When a infinite loop is in your code, the code execution point is stuck in the loop forever and will not exit the loop.
+When writing loops, make sure to not cause infinite loops as they can cause your computer to become not responding.
+
+when to use which
+Use a for loop when you know how many iterations you want to run, when it starts, and when it will end.
+Use a while loop if you do not know the number of iterations, only the condition when the loop should end.
+Fun fact: Python does not have real for loops, so Python programmers do not even have a choice. Python is exceptionally blur.
