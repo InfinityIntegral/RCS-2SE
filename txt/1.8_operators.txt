@@ -1,0 +1,140 @@
+Unit 1.8 - Pointer, Arithmetic, and Bitwise Operators
+my C++ became a CASIO fx-97SGX++
+
+Pointer Operators
+The pointer operators are * and &. Note that these have nothing to do with the symbols at the end of int* and int&, those are part of types, not operators.
+The operators * and & that we will learn today are placed in front of lvalues (or variables) to change them to and from pointers.
+
+Getting a pointer
+The & operator turns something into a pointer. The result when it is applied to a lvalue is a pointer pointing to the memory location of that lvalue.
+int x = 0; ← integerint* y = (&x); ← pointer to integerint** z = (&y); ← pointer to pointer to integer
+
+Dereferencing a pointer
+The * operator dereferences pointers. When applied to a pointer, it outputs the data at the corresponding memory location as a reference. Because it is a reference and not a copy, you can assign to it.
+int x = 0; ← x has some memory for a integerint* y = (&x); ← y points to x(*y) = 1; ← (*y) links to the same memory as x, x is 1 now
+
+Common mistake
+When trying to change the stuff pointed to by a pointer, make sure you assign to the reference gotten by dereferencing the pointer.
+If you just assign a new pointer to the pointer, that does nothing to the underlying memory pointed to by the original pointer. You may even cause a memory leak if the original pointer points to somewhere on the heap.
+
+not ok
+int x = 0;int* y = (&x); ← y points to xint z = 1;y = (&z); ← does not modify memory linked to x
+x is still 1, and you lost the pointer to x. Here losing the pointer is ok as x is on the stack.
+
+x
+y
+0
+0x7A26
+
+x
+y
+0
+0x7A26
+z
+1
+
+x
+y
+0
+0xA07B
+z
+1
+x is not changed
+
+correct implementation
+int x = 0;int* y = (&x); ← y points to xint z = 1;(*y) = z; ← value of z copied to (*y) which is x
+With (*y), you get a reference of the lvalue that y points to, which is x. Assigning to that changes the data stored in the memory linked to x, which changes x. For consistency we kept z.
+
+x
+y
+0
+0x7A26
+
+x
+y
+0
+0x7A26
+z
+1
+
+x
+y
+1
+0x7A26
+z
+1
+data copied over
+x changed
+
+Arithmetic Operators
+Yes, we are learning primary school math at unit 1.8
+C++ provides the arithmetic operators +, -, *, /, and %. +, -, *, /, are respectively plus, minus, multiply, and divide. They do exactly what you expect, except that / always rounds the answer towards 0 when used on integers.
+% gets the remainder of integer division, it is not defined for floating point types
+
+Practice
+Calculate these without code or calculator.Remember order of operations (% same level as * and /)
+1 + 1 - 1 + 1 - 11 + 2 * 3 - 9 / 320 + (9 / 6)5 * (1 / (2 - 1 - 1))3 * (8 / 3) - 8 % 3
+
+Practice
+Calculate these without code or calculator.Remember order of operations (% same level as * and /)
+1 + 1 - 1 + 1 - 1 → 11 + 2 * 3 - 9 / 3 → 420 + (9 / 6) → 21 (9 / 6 rounds down)5 * (1 / (2 - 1 - 1)) → crash (cannot divide by 0)8 / 3 - 2 * (8 % 3) → -2 (8%3 is 2, 8/3 rounds down)
+
+Practice
+Calculate these without code or calculator.Remember order of operations (% same level as * and /)
+1.0f - 1.0f + 1.0f2.0f * 0.5f / 0.2f-1.0f * (5.0f / (3.0f - 3.0f))6.0f / 4.0f6.0f % 4.0f
+
+Practice
+Calculate these without code or calculator.Remember order of operations (% same level as * and /)
+1.0f - 1.0f + 1.0f → 1.0f2.0f * 0.5f / 0.2f → 5.0f-1.0f * (5.0f / (3.0f - 3.0f)) → -infinity (divide by 0.0f ok)6.0f / 4.0f → 1.5f6.0f % 4.0f → does not compile (no % operator for float)
+
+shortcuts
+There are operators provided for the common patternx = x ? y; which assigns x ? y to x for some operator ?
+x = x + y; → x += y;x = x - y; → x -= y;x = x * y; → x *= y;x = x / y; → x /= y;x = x % y; → x %= y;
+
+shortcuts
+Shortcuts are also defined for adding or subtracting 1 to numeric variables. This is helpful to iterate through data using a index.
+x = x + 1; → x++;x = x - 1; → x--;
+
+But… there are more
+How about % for floating point, exponentiation, square root, cube root, and trigonometry?
+These are supported in C++ but require importing of stuff from the Standard Library. We will learn about these later.
+
+Bitwise Operators
+Bitwise operators looks at and changes single bits of lvalues. When applied to 1 or 2 (depending on operator) integer lvalues, the result is of the same type but with each bit changed separately according to the pattern.
+Bitwise operators include &, |, ^, and ~, which are respectively and, or, xor, and not. not takes 1 lvalue but the others all take 2.
+
+Bitwise Operators
+For any 2 bits,
+& (and) returns 1 if both are 1, 0 otherwise.| (or) returns 0 if both are 0, 1 otherwise.^ (xor) returns 1 if exactly 1 bit is 1, 0 otherwise.
+For any bit, ~ (not) returns the opposite of that bit.
+Recall that a bit can either be 0 or 1
+
+Practice
+Calculate these without code or calculator.
+0 & (1 | 0)(0 | 1) ^ (1 & 0)1 | ~(0 | 1)~1 & (~0 & 1)(0 ^ 0) | (1 ^ 1)
+
+Practice
+Calculate these without code or calculator.
+0 & (1 | 0) → 0 (false)(0 | 1) ^ (1 & 0) → 1 (true)1 | ~(0 | 1) → 1 (true) (1 | anything is true)~1 & (~0 & 1) → 0 (false) (0 & anything is false)(0 ^ 0) | (1 ^ 1) → 0 (false)
+
+shortcuts
+Similar to the arithmetic operator shortcuts, special operators are defined for bitwise operations in the form x = x ? y
+x = x & y; → x &= y;x = x | y; → x |= y;x = x ^ y; → x ^= y;
+Since ~ (not) only takes 1 input, it does not have a shortcut operator.
+
+Bit Shifting Operators
+Bit shifting operators literally shift bits left and write. << shifts bits left and >> shifts bit right. These can be used to package multiple integers into 1 if you do not need the full precision for each component.
+8 → 00000000000000000000000000001000(8 << 2) → 00000000000000000000000000100000(8 >> 2) → 00000000000000000000000000000010
+
+Bit packing
+Suppose you want to store the number of a HDB flat. The numerical part is always less than 2048 (2^11) and the suffix (none, A, B, C, D), has less than 8 (2^3) variations, the whole address can be packed into a unsigned short.
+uu aaaaaaaaaaa bbb
+where a stores the numerical part, b stores the suffix, and u is unused space.
+
+Bit packing
+int blkNumerical;int suffix; // 0 is none, 1 is A, 2 is B, etcunsigned short blkNumber = static_cast<unsigned short>((blkNumerical << 3) | (suffix));
+Using 2 separate ints would cost 8 bytes of memory. Using a single short costs only 2 bytes. You saved 6 bytes per blk, a 75% decrease in database size.
+
+Bit packing
+unsigned short blkNumber;int blkNumerical = static_cast<int>(2047 & (blkNumber >> 3));int suffix = static_cast<int>(7 & blkNumber);
+Bit packing can be reverted to get back the original numbers from the compressed form which is stored in a database.
