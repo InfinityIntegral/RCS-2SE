@@ -1,0 +1,50 @@
+Unit 1.9 - Comparators and Conditionals
+if, else if, else
+
+Comparison Operators
+Comparison operators compare 2 numerical values to return a bool based on if one is lesser than, equal to, or more than, the other.
+These are == (equal to), != (not equal to), < (lesser than), > (more than), <= (lesser than or equal to), and >= (more than or equal to).
+
+Logical Operators
+There are 3 logical operators. && (and), and || (or) operate on 2 booleans. They are very similar to their bitwise equivalents except for short circuiting. You will see more about that later in this unit.
+! (not) operates on 1 boolean and it gives the opposite value of that boolean. This is very similar to the bitwise not (~) operator.
+
+Conditionals
+Conditionals can be used to decide what code to run depending on variables in the code. Conditional keywords, that is if, else if, and else, are attached to code blocks. if and else if are also attached to conditions.
+A condition is a expression that evaluates to a bool. This means that it either outputs true or false.
+Only at most 1 keyword in a conditional chain can run its attached code block
+
+Conditionals
+The first conditional keyword in a conditionals chain is always if. If the condition attached is true, the code block attached to the if is run and the rest of the conditional is ignored.
+If the condition is false, the next conditional keyword in the chain is checked.
+
+Conditionals
+Another conditional keyword is else if. It is also attached to the code block and the condition. If the code execution point reaches it, the condition is checked.
+If the condition is true, the attached code block is run and the rest of the conditional chain is ignored.
+If the condition is false, the next conditional keyword is checked.
+
+Conditionals
+The last conditional keyword is else. It can only be the last keyword in a conditional chain. If it is ever checked, the code block attached always runs since it has no attached condition.
+else is essentially like a default for a conditional chain that has its code run if none of the previous conditions are true.
+
+Practice
+Consider the programme below:
+int x;if(x < -5 || x > 10){std::cout << “A”;}else if(x >= -3 && x <= -1){std::cout << “B”;}else if(x >= 3){std::cout << “C”;}else if(x == 0){std::cout << “D”;}else if(x != 1){std::cout << “E”;}else{std::cout << “F”;}
+
+Practice
+The programme in the last slide contains many comparison operators and logical operators used in a conditional chain.
+The variable x is left uninitialised. For each integer from -7 to 7, if that integer is used to initialise x, what would the programme send into std::cout?
+
+Short circuiting
+Logical operators can perform short circuiting. If the left side of || is true or the left side of && is false, the right side is not evaluated as it would not matter.
+false && anything → falsetrue || anything → true
+
+Short circuiting
+Suppose we want to transfer the int pointed to by a pointer x to a int variable y only if the pointer is not null and the int pointed to by x is positive
+if(x != nullptr && (*x) > 0){y = (*x);}
+This does not crash, because if x is nullptr, x != nullptr is false. That triggers short circuiting and (*x) > 0, with the dangerous (*x), is never evaluated.
+
+Short circuiting
+Suppose we want to find primes but that takes a long time, so we cache results. To check if a certain number x is prime,
+if(getCache(x) == false || checkPrime(x) == false){std::cout << “not prime”;}else{std::cout << “is prime”;}
+If the cache indicates that x is not prime, the right side complicated function will not run, saving computation time.
