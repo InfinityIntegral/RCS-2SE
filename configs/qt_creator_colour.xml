@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<style-scheme version="1.0" name="05524F">
+  <style name="Text" foreground="#ff00c8" background="#fcfcfc"/>
+  <style name="Link" underlineStyle="SingleUnderline"/>
+  <style name="Selection" background="#ff80e4"/>
+  <style name="LineNumber"/>
+  <style name="SearchResult"/>
+  <style name="SearchResultAlt1" foreground="#000033"/>
+  <style name="SearchResultAlt2" foreground="#330000"/>
+  <style name="SearchResultContainingFunction"/>
+  <style name="SearchScope"/>
+  <style name="Parentheses"/>
+  <style name="ParenthesesMismatch"/>
+  <style name="AutoComplete"/>
+  <style name="CurrentLine"/>
+  <style name="CurrentLineNumber"/>
+  <style name="Occurrences"/>
+  <style name="Occurrences.Unused"/>
+  <style name="Occurrences.Rename"/>
+  <style name="Number"/>
+  <style name="String"/>
+  <style name="Type"/>
+  <style name="Concept"/>
+  <style name="Namespace"/>
+  <style name="Local"/>
+  <style name="Parameter"/>
+  <style name="Global"/>
+  <style name="Field"/>
+  <style name="Static"/>
+  <style name="VirtualMethod"/>
+  <style name="Function"/>
+  <style name="Keyword"/>
+  <style name="PrimitiveType"/>
+  <style name="Operator"/>
+  <style name="Overloaded Operator"/>
+  <style name="Punctuation"/>
+  <style name="Preprocessor"/>
+  <style name="Macro"/>
+  <style name="Label"/>
+  <style name="Attribute"/>
+  <style name="Comment" foreground="#ff80e4"/>
+  <style name="Doxygen.Comment"/>
+  <style name="Doxygen.Tag"/>
+  <style name="VisualWhitespace" foreground="#ff80e4"/>
+  <style name="QmlLocalId"/>
+  <style name="QmlExternalId"/>
+  <style name="QmlTypeId"/>
+  <style name="QmlRootObjectProperty"/>
+  <style name="QmlScopeObjectProperty"/>
+  <style name="QmlExternalObjectProperty"/>
+  <style name="JsScopeVar"/>
+  <style name="JsImportVar"/>
+  <style name="JsGlobalVar"/>
+  <style name="QmlStateName"/>
+  <style name="Binding"/>
+  <style name="DisabledCode"/>
+  <style name="AddedLine"/>
+  <style name="RemovedLine"/>
+  <style name="DiffFile"/>
+  <style name="DiffLocation"/>
+  <style name="DiffFileLine"/>
+  <style name="DiffContextLine"/>
+  <style name="DiffSourceLine"/>
+  <style name="DiffSourceChar"/>
+  <style name="DiffDestLine"/>
+  <style name="DiffDestChar"/>
+  <style name="LogChangeLine"/>
+  <style name="LogAuthorName"/>
+  <style name="LogCommitDate"/>
+  <style name="LogCommitHash"/>
+  <style name="LogCommitSubject"/>
+  <style name="LogDecoration"/>
+  <style name="Info"/>
+  <style name="InfoContext"/>
+  <style name="Warning"/>
+  <style name="WarningContext"/>
+  <style name="Error"/>
+  <style name="ErrorContext"/>
+  <style name="Declaration"/>
+  <style name="FunctionDefinition"/>
+  <style name="OutputArgument"/>
+  <style name="StaticMember"/>
+  <style name="CocoCodeAdded"/>
+  <style name="CocoPartiallyCovered"/>
+  <style name="CocoNotCovered"/>
+  <style name="CocoFullyCovered"/>
+  <style name="CocoManuallyValidated"/>
+  <style name="CocoDeadCode"/>
+  <style name="CocoExecutionCountTooLow"/>
+  <style name="CocoNotCoveredInfo"/>
+  <style name="CocoCoveredInfo"/>
+  <style name="CocoManuallyValidatedInfo"/>
+</style-scheme>

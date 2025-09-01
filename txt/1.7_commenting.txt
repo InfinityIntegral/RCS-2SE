@@ -1,0 +1,35 @@
+Unit 1.7 - Commenting
+sometimes your friends are blur
+
+Collaborative programming
+For this course, you will be working alone.
+However in bigger projects such as Qt or Windows, many people work on the same project. They need to understand each other’s code to work well together.
+Comments can help others understand your code more easily.
+Imagine you are working at Microsoft to build an upgrade for Windows 11.
+
+No need comments?
+bootWindowsSystem(){    lagForSeconds(300.0f);    loadSettings();    displayLoginPage();}
+If your code looks like this, you probably do not need comments. You should code like this (not the lag part).
+
+This needs comments
+b(){lfs(300.0f); ls(); dlp();}
+But if your code looks like this, it is completely unreadable and definitely needs a lot of comments.
+You definitely should not be coding like this, but in Informatics Olympiad, there is no time, so we do this to save time.
+
+Single Line Comments
+Anything that goes after // is part of a comment.
+If you use the 05524F theme (I made it) for Qt Creator, code should display in magenta and comments display in light pink.
+someFunction(); // run some function
+The compiler ignores comments, they are only for people reading the code.
+
+Multiline Comments
+In case you need a long comment, for example to explain the error codes sent by a programme or to explain a design choice, you can use multiline comments.
+Multiline comments can span several lines. Their start is marked by /* and their end is marked by */
+Similar to single line comments, they should display in light pink if you use the 05524F theme.
+
+Multiline Comments
+someFunction();
+/*Here we run someFunction.This is very important to how the programme functions.The function repeatedly reminds the user in the cmdthat the user is blur.*/
+
+Much better…
+/*A lag of 5 minutes is implemented in Windows 11to show our brand identity.*/b(){ // function to boot Windows    lfs(300.0f); // lag, because we are Microsoft    ls(); // load user settings such as background image    dlp(); // show user the login page}
