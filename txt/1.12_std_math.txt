@@ -1,0 +1,31 @@
+Unit 1.12 - Standard Library Mathematical Functions
+blurness = std::numeric_limits<long double>::infinity();
+
+<cmath>
+The Standard Library cmath contains various functions for advanced mathematics operations that C++ does not offer builtin.
+These include exponentiation, logarithms, and trigonometry.
+We will only be looking at float variations of commonly used functions in detail. We will look through all of them at the end of this unit.
+
+Miscellaneous
+std::fabsf ← absolute value
+std::fminf ← minimum of 2 floating point numbersstd::fmaxf ← maximum of 2 floating point numbers
+std::nanf ← float NaN
+std::floorf ← floor functionstd::ceilf ← ceiling functionstd::roundf ← round to nearest integer
+
+Exponentiation and Logarithms
+std::powf ← exponentiationstd::sqrtf ← square rootstd::cbrtf ← cube root
+std::expf ← e^xstd::exp2f ← 2^x
+std::logf ← ln (natural logarithm)std::log2f ← logarithm base 2
+
+Trigonometry
+std::sinf ← sinestd::cosf ← cosinestd::tanf ← tangent
+std::asinf ← inverse sinestd::acosf ← inverse cosinestd::atanf ← inverse tangentstd::atan2f ← sign aware inverse tangent
+
+<numeric_limits>
+The numeric_limits header in the Standard Library contains information about the limits of types. It also provides various constants.
+To call a function func in the header which returns a number of type T, use
+std::numeric_limits<T>::func()
+
+<numeric_limits>
+min ← smallest possible value for integers, smallest possible positive value for floating point, excluding denormalisedmax ← largest possible valuedenorm_min ← smallest possible positive value including denormalised floating point numbersepsilon ← floating point accuracy as proportion of number
+infinity ← positive infinity for floating point numbersquiet_NaN ← NaN for floating point numbers
