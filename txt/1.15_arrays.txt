@@ -1,0 +1,50 @@
+Unit 1.15 - Arrays
+cos mallocing in a loop is blur
+
+Arrays
+We can use loops to run code many times, very convenient.
+How about declaring many variables? Unfortunately, that cannot be done using loops safely on the stack.
+Instead, we can use arrays. Think of an array as a container. It can contain a fixed number of a fixed type of stuff.
+
+The Syntax
+To use arrays, you must first include the header <array>.
+std::array<T, x> is the general form of an array, where T is the type of stuff it stores (cannot be reference, anything else is ok) and x is the number of stuff.
+Examples:std::array<int, 5> ← store 5 intsstd::array<bool*, 3> ← store 3 pointers to bools
+
+Initialisation
+If you just declare an array, it is not initialised and contains nonsensical data. That is ok, because you will fill it later anyways.
+std::array<int, 5> arr; ← arr contains nonsense
+You can also use a list of values enclosed in curly brackets to initialise arrays.
+std::array<int, 5> arr = {2, 3, 5, 7, 11}; ← initialised
+
+Empty Initialisation
+We will use the array
+std::array<int, 5> arr;
+to look at array stuff for the remaining part of this unit.
+We can initialise it to contain all zeroes. Instead of using a list of values, we simply use a list of… nothing.
+std::array<int, 5> arr = {}; ← all 0
+
+Getting and Setting stuff
+The functionT& std::array::at(unsigned long long n)returns the nth element of an array as a reference.
+Since it is returned as a reference, we can get and set any element in an array given the index using that function.
+arr.at(0) = 26; ← set first element of arr to 26int x = arr.at(3); ← initialise x with 4th element of arr
+
+0 Indexing
+Wait… the 4th element has index 3? What?
+This is 0 indexing, where the index numbers of objects in a data structure start from 0. Instead of counting like 1, 2, 3, …, C++ counts like 0, 1, 2, …
+Other languages, even the blur ones like Python, Java, and JS, all use 0 indexing. 
+
+Size of array
+unsigned long long std::array::size()provides the number of objects that the array can contain.
+This function is kind of useless, since to declare the array or even just a pointer to it, you need the size of it. The array size counts as part of the type. However, it is good to know that this function exists.
+int x = arr.size(); ← x is 5 because arr is std::array<int, 5>
+
+Resetting an array
+C++ provides a builtin function for resetting the data in an array, such as by setting them all to zero, that isvoid std::array::fill(const T&)for an array containing objects of type T.
+Therefore, you do not need to write loops for that.
+arr.fill(26); ← make everything in arr become 26arr is {26, 26, 26, 26, 26} now.
+
+About C Arrays and []
+What we have learnt this unit is the arrays from the Standard Library. There are also C arrays that use pointers more directly, but they are not preferred nowadays.
+There is also the [] operator similar to std::array::at, but it is also unsafe and not preferred nowadays.
+Using std::array with std::array::at reduces the risk of weird bugs caused by undefined behaviour.
