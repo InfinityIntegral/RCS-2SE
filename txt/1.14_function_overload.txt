@@ -1,0 +1,19 @@
+Unit 1.14 - Function Overload
+func is different from func
+
+Function Overloading
+Recall that in the last unit, we learnt that functions are identified by signature, not by name.
+This means that we can have multiple functions with different parameters but same name, giving different signatures.
+When calling the function, the compiler decides which one to use from the parameters you pass in.
+
+Function Overloading
+Function overloading can be done to group conceptually similar functions with completely different implementations under the same name.
+For example, QObject::connect from the Qt library accepts a lot of different types of stuff that you can connect to catch events, but they all do the same thing, so they all share the name QObject::connect.
+
+Function Overloading
+QMetaObject::Connection	connect(const QObject* sender, const QMetaMethod& signal, const QObject* receiver, const QMetaMethod& method, Qt::ConnectionType type = Qt::AutoConnection)
+QMetaObject::Connection	connect(const QObject* sender, PointerToMemberFunction signal, const QObject* context, Functor functor, Qt::ConnectionType type = Qt::AutoConnection)
+
+Function Overloading
+Note how the 2 functions in the previous slide have completely different function signatures but share the same name.
+This means that code using both variations use the function name QObject::connect, which represents the idea of catching a event. This makes the code easier to understand as you do not need to know how internally it is implemented to be able to infer what the code does.
