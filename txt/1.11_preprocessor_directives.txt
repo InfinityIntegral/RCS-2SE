@@ -1,0 +1,54 @@
+Unit 1.11 - Preprocessor Directives
+#something
+
+Preprocessor Directives
+Preprocessor directives are lines of code starting with # that instruct the preprocessor to do stuff. The preprocessor runs before the compiler and modifies your code according to its directives before the code is sent to the compiler.
+Each preprocessor directive starts with a # followed immediately by a word, which is then followed by arguments if any. A preprocessor directive can only stay on 1 line.
+
+Fun fact
+Python, Java, and JS all do not have preprocessors.
+That is blur.
+Yes this entire slide is for calling other languages blur.
+
+#include
+#include is used to add libraries to your code so you can use functions inside these libraries. Libraries are reusable pieces of code that can be added to other projects. We will learn more about the Standard Library and Qt later.
+Your own code that defines stuff also are kind of libraries. So you can use #include with your own files also, just use the file name as argument.
+
+#include
+The argument should be included in <> or “”. Builtin stuff such as the Standard Library and Qt should be enclosed in <>, and your own code should be enclosed in “”.
+Examples:#include <string> ← including from Standard Library#include <QString> ← including from Qt#include “something.h” ← including own code#include “SGEXTN/filesystem/sgxfile.h” ← SGEXTN
+
+#define
+#define defines a macro. This can be used for conditional compilation. Conditional compilation is when code is added and removed based on preprocessor settings. This can be used for platform specific code.
+#define WINDOWS ← define macro WINDOWS
+Using #undef reverses the #define
+#undef WINDOWS ← undo define WINDOWS
+
+#define
+#define can also be used as a find-replace. If it has more than 1 argument, it replaces all appearances of the first element with the remaining stuff.
+#define int long longreplaces all appearances of “int” with “long long”
+Do not do this except in Informatics Olympiad as it can have unintended consequences such as changing a variable called “integer” to “long longeger”, which is nonsense.
+
+#define in Informatics Olympiad
+Some common #define statements used in Informatics Olympiad:
+#define int long long#define float double#define z128 __int128
+All this is bad practise, so they should never be used outside of Informatics Olympiad.
+
+Practice
+#define float long doublefloat buoyancy = 1.0f;float timeDifference = 0.02f;float floatUpwardsForce = buoyancy * timeDifference;
+Explain why the above code would not compile if used in a physics engine to allow objects to float upwards when submerged in water.
+
+Practice
+The variable name floatUpwardsForce contains the word “float”. So when the #define is applied, it becomes “long doubleUpwardsForce”.
+Then the line of code becomeslong double long doubleUpwardsForce = …
+That is nonsensical.
+
+Conditional Compilation
+You can use conditional compilation to make some code run only when a certain macro is defined.
+#ifdef A ← if A is defined#ifndef A ← if A is not defined
+Since there is no scope in preprocessor directives, you must use #endif to signal the end of code blocks attached to conditionals.
+
+#pragma
+Usually, the compiler compiles code the way that it thinks would run fastest.
+However, you can use #pragma to force it to apply a certain optimisation. Note that this usually slows down your code unless you know very well what you are doing.
+Outside of Informatics Olympiad, you never need to be kaypoh with the compiler like that.
