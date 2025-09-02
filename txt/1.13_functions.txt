@@ -1,0 +1,65 @@
+Unit 1.13 - Functions
+modularisation is not self-plagiarism
+
+Functions
+Functions allow you to reuse pieces of code. This is good as it reduces code duplication (same piece of code being found in different files) and make maintenance easier.
+When declaring a function, you must specify its return value, its name, its parameters, and the code associated with it. Note that you can also write forward declarations where you put the code somewhere else
+
+Functions
+void callUserBlur(){std::cout << “You are blur”;}
+void ← return value (it returns nothing)callUserBlur ← name of function() ← parameters (nothing here){std::cout << “You are blur”;} ← code block being run
+
+Function Signature
+The in front part of a function declaration is called a function signature or a method signature.
+void callUserBlur()
+The signature tells the compiler and also you how the function can be used. Functions are recognised internally by their signatures, not their names, through a process known as name mangling.
+
+Calling a Function
+You can use a function by calling it, which is writing its name and providing appropriate parameters. This runs the code block and produces an output of type return value.
+callUserBlur(); ← no parameters or return value here
+A function returning void returns nothing.
+
+Returning Stuff
+Functions can do computation then return the result to be used in other code.
+float getPi(){ ← declaration    return 3.14159265358979f; ← computation and return}
+Now writing getPi(); in code is the same as writing directly 3.14159265358979f.
+
+Multiple Returns
+Usually, functions can return only 1 value.
+However, you can pass parameters by reference or by pointer so that the data in memory can be modified inside the function. This for all purposes is equivalent to returning multiple values
+void return2Outputs(int& output1, int& output2);
+
+Taking Parameters
+A function can take inputs called parameters. These allow it to produce output based on an input.
+int powerOf2(int exponent){    int x = 1;    for(int i=0; i<exponent; i++){x *= 2;}    return x;}
+
+Taking Parameters
+Now the function can be called with different parameters.
+powerOf2(1); ← gives 2powerOf2(5); ← gives 32powerOf2(10); ← gives 1024
+That is much more useful for performing computation.
+Parameters behave like variables the scope of which is the code block attached to the function.
+
+Recursion
+A function can call itself inside its code block. This is called recursion.
+Note that recursion tend to be inefficient and it is very easy to get stuck in infinite loops in using recursion.
+
+Recursion
+int factorial(int n){    if(n == 1){return 1;}    else{return (n * factorial(n - 1));}}
+Note how the code block attached to the function factorial calls factorial(n - 1) inside. Also note that if a negative number is passed to n, the computation will never end.
+
+Recursion
+Recursion consumes a lot of space on the stack. If the stack has no more space, a stack overflow error occurs and the programme crashes.
+Crashing is blur. -- Cher Tianle
+This is why recursion tend to be bad in most cases.
+
+Forward Declaration
+The compiler only knows about a function after it has been declared. It does not need the code block to know that a function exists.
+To use a function that is declared later or in a different file, you can forward declare it and use it first. The compiler will find the code block later. The code block is called the implementation of the function.
+
+Modularisation
+Functions help with modularisation, which reduces interdependency between code.
+This is good as lesser interdependency means that changing a part of the code would be less likely to break other parts, which makes it much easier to change parts.
+
+Namespaces
+Functions can be put into namespaces. The Standard Library does that so, for example, std::abs (absolute value) would not conflict with a custom function abs that generates something called a application binary stream.
+You can see namespaces (std:: for STandarD Library) as part of the function’s name. Note that putting the function into prefixed classes is a better approach to this that we will learn later.
