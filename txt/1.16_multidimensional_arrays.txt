@@ -1,0 +1,16 @@
+Unit 1.16 - Multidimensional Arrays
+std::array<std::array<std::array<int, 3>, 4>, 5> arr;
+
+Arrays with the type being arrays
+Recall that an array has the general form std::array<T, x> where x is a integer and T can be any type.
+So T itself can be another array.
+This means that accessing by index a member of the array gives another array. This is known as multidimensional arrays.
+
+Example
+What we saw on the title slide,std::array<std::array<std::array<int, 3>, 4>, 5> arr;is an example of a 3 dimensional array.
+All functions that work on single dimensional arrays work on multidimensional arrays also. There is really nothing difficult about multidimensional arrays, it only gets confusing when using C arrays but we are using std::array from the Standard Library so it is ok.
+
+Use Case
+Multidimensional arrays can be used to store data for every cell in a 2 dimensional grid or a 3 dimensional lattice.
+This can be helpful for graph theory questions involving traversing space.
+Sometimes the space is not a physical space, but a space of ways to choose something.
