@@ -1,0 +1,48 @@
+Unit 1.18 - Pairs and Tuples
+a new type? here it is
+
+The need for new types
+C++’s predefined types may not be sufficient for all purposes. For example, if you are building an application to track students’ PSLE ALs, you would need 4 integers for each subject (ignoring Higher Mother Tongue) and a string for the student’s name.
+We can essentially make our own types using std::pair and std::tuple. These are in the Standard Library headers <utility> and <tuple> respectively.
+
+std::pair
+We can group 2 objects of different types into a single type using std::pair, which literally groups them together.
+The type of the resulting std::pair is std::pair<T1, T2> where T1 is the type of the first object and T2 is the type of the second object.
+Example:std::pair<int, std::string> ← group string with index number
+
+std::make_pair
+To make a pair, we can use std::make_pair with the 2 values to be placed into the pair. The return value is deduced automatically from the parameters accepted.
+std::pair<int, bool> x = std::make_pair(2, true);
+Pairs are types, just like primitives types. The 2 objects in a pair can be stored and passed to functions together.
+
+Example
+We can group a std::string and a float together into a single type to contain a student’s name and his PSLE T-score.
+float tScore = 300.0f;std::string name = “Tianle”;std::pair<std::string, float> student = std::make_pair(name, tScore); ← make pair
+The pair then can be stored and passed to functions.
+
+Accessing objects in a pair
+We can use the first and second properties of a std::pair to access and modify its contents.
+These are properties, not functions, so you can directly get and set them. The lvalue you get from the property is linked directly to the piece of memory that stores the data.
+These properties are helpful to use pairs in functions.
+
+Accessing objects in a pair
+bool isBlur(std::pair<std::string, float> student){    if(student.second > 280.0f){return false;}    return true;}
+void setScore(std::pair<std::string, float>& student, float x){    student.second = x; ← must pass by reference}
+
+Accessing objects in a pair
+The functions on the previous slide then can be used on std::pair objects, such as std::pair<std::string, float> student that we defined earlier.
+bool x = isBlur(student); ← returns false because the second value, 300, is more than 280
+setScore(student, 726.0f); ← now the second value is 726
+
+std::tuple
+std::tuple is essentially the same thing as std::pair except that it can have more than 2 objects inside. std::make_tuple is the tuple equivalent for std::pair.
+We can use a tuple to store the PSLE ALs of a student and his name.
+std::tuple<std::string, int, int, int, int> student = std::make_tuple(“Tianle”, 1, 1, 1, 1);
+
+Accessing elements in a tuple
+We can use std::get to access elements in a tuple.
+To access the nth element of a tuple x, usestd::get<n>(x)Note that n must be a constant integer, not a variable. The type of the result will match the nth element of the tuple. Remember that tuples are 0 indexed. This returns a reference so you can both get and set to it.
+
+Accessing elements in a tuple
+int totalALs(std::tuple<std::string, int, int, int, int> student){    return (std::get<1>(student) + std::get<2>(student) + std::get<3>(student) + std::get<4>(student));}
+Tuples can be passed to and used in functions also. That is the whole point of why they exist.
