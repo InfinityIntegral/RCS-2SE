@@ -1,0 +1,70 @@
+Unit 1.17 - Strings
+arrays of chars, essentially
+
+Strings
+Strings behave like arrays of chars that represent text. They are great for Singlish, English, and Malay, but not so good for other languages.
+The main difference between strings and arrays is that you can add strings to combine the text, but usually you do not add arrays together, that would not make sense.
+The type of a string is std::string, you need the header file <string> from the Standard Library to use it.
+
+Adding Strings
+You can use the + operator to add strings, or add a string and a char.
+std::string s = “You are”;s = s + “ blur”; ← adding strings = s + ‘.’; ← adding char
+Adding string concatenates them. This means that the text is placed beside each other in order.
+
+Adding Strings
+The += shortcut operator is defined also for both adding another string or a char to a existing string.
+std::string s = “b”;s += “lu”; ← adding another strings += ‘r’; ← adding a char
+Remember that a += b is the same as a = a + b.
+
+Constructing a string
+When a string is declared without initialisation, it is a empty string, or “”.
+std::string s; ← empty stringstd::string s = “”; ← empty string, same thing
+You can initialise it if you want.
+std::string s = “I am not blur.”;
+
+Accessing a char in a string
+Similar to arrays, you can use std::string::at to get the char at a specific index of the string. Strings are 0 indexed. Note that the char is returned by reference, allowing you to modify the string by setting to the char.
+std::string s = “Why so blur?”;char x = s.at(1); ← 2nd char in string, which is hs.at(5) = ‘?’; ← change 6th char to question mark
+
+Length of a string
+Similar to arrays, you can use std::string::size to get the number of chars in a string. You can use std::string::length also. Checking if the length is 0 can check if the string is a empty string.
+s.length() == 0 is same as s == “”
+std::string s = “Why so blur?”;int x = s.length(); ← x is 12, spaces count also
+
+Substrings
+Using std::string::substr, you can extract parts of a string, or the substrings, efficiently.
+We will look at 2 versions of this function equivalent tostd::string std::string::substr(unsigned long long pos)andstd::string std::string::substr(unsigned long long pos, unsigned long long length);
+
+Substrings
+The given function signatures are not the actual signatures, but it is equivalent for normal usage purposes.
+The first version extracts the substring starting from index pos until the end of the string. The second version extracts the substring starting from index pos with a length of length.
+
+Finding Substrings
+std::string::find and std::string::contains give information about if and where a string contains a substring.
+std::string::contains returns true if the substring is found and false otherwise. std::string::find returns the index where the substring starts if it is found and -1 otherwise. Note that std::string::find only looks at the first instance of the substring found.
+These work with chars instead of strings as substrings also.
+
+Finding Substrings
+Note that std::string::find returns a unsigned long long, which cannot take -1. The -1 actually overflows to the largest possible unsigned long long.
+To prevent weird bugs related to this, you should use std::string::contains first to check if the substring is there at all before using std::string::find to get its index.
+
+Converting to String
+Numbers can be converted to strings for display purposes using std::to_string.
+std::string s = std::to_string(1); ← “1”std::string s = std::to_string(-1.0f); ← “-1.0”std::string s = std::to_string(0.1f + 0.2f); ← try this
+
+Parsing Strings
+Converting strings to numbers is known as parsing the string. You must use the appropriate conversion depending on the type of number you want.
+std::stoi - int, std::stoll - long long, std::stoul - unsigned int, std::stoull - unsigned long long, std::stof - float, std::stod - double, std::stold - long double
+
+Error Checking
+If the string that you attempt to convert to a number does not actually represent a number of the correct type, a exception is thrown.
+If the exception is not caught, the programme will crash.
+Crashing is blur -- Cher Tianle
+
+Error Checking
+We can use try-catch blocks to handle exceptions.
+std::string s = “not a number”;float f;try{f = std::stof(s);} ← try to convertcatch(...){f = 0.0f;} ← if fail, use default value
+
+String got a upgrade?
+Later in the course, we will learn about QString from the Qt Library. It replaces std::string and is much better. It also supports all languages (even Higher Chinese), and you do not need annoying exception handling to work with it.
+For now, we will continue using std::string up to unit 3.
