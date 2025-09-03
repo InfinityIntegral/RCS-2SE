@@ -1,0 +1,32 @@
+Unit 1.20 - Const and Volatile
+write const not cos you blur, write const cos compiler blur
+
+Const and Volatile
+const and volatile are modifiers that can be applied to types to influence compiler optimisations. const signals that a variable should not change after declaration and volatile indicates that a variable uses memory linked to hardware which may change unpredictably.
+These can technically be removed using const_cast, but that is only safe for API compatibility purposes.
+
+Const
+const signals that a variable will not change after declaration (and possibly initialisation upon declaration). If you try to change it later, the compiler will complain.
+This allows the compiler to optimise more and also prevents you from accidentally changing it.
+const int x = 0;x = 1; ← compile error
+
+Volatile
+Volatile signals that the memory linked to a variable is also being controlled by hardware. Therefore, the compiler will not optimise away what appears to be redundant reads.
+Consider some code for a device that determines the current temperature. It waits for an hour before taking the next measurement. Initially the temperature is 33 deg Celsius but it later increased to 35 deg Celsius.
+
+Volatile
+float temp; ← linked to temperature sensorfloat tempNow = temp; ← 33 deg C, correctwait(); ← wait for 1 hourfloat tempLater = temp; ← 33 deg C, wrong liao
+The compiler sees that the code did not change temp, so it assumes temp did not change and optimised away the read operation an hour later which is necessary.
+
+Volatile
+volatile float temp; ← linked to temperature sensorfloat tempNow = temp; ← 33 deg C, correctwait(); ← wait for 1 hourfloat tempLater = temp; ← 35 deg C, correct
+An hour later, temp, which is declared as volatile, is read again. This gives the correct temperature reading.
+
+Modifiers with pointers
+const and volatile apply to whatever immediately to the left. If there is nothing there, it applies to the thing adjacent on the right. This means you can make different parts of a pointer const by placing the const modifier differently.
+const int*int* constconst int* const
+
+Modifiers with pointers
+const int* ← const applies to int, you cannot write to the memory (the int) that this pointer is pointing to
+int* const ← const applies to * (which means pointer here), the pointer variable itself cannot be modified, so you cannot make it point to another int
+const int* const ← everything locked, cannot modify pointer and also cannot modify the stuff it points to
