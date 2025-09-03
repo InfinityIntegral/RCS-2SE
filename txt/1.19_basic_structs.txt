@@ -1,0 +1,27 @@
+Unit 1.19 - Basic Structs
+Cher, give me a new type
+
+is std::tuple not enough?
+std::tuple which we learnt in the previous unit allows us to group variables together.
+However, the code produced is not readable at all. std::get<n> does not tell us what the data means.
+std::pair and std::tuple are only suitable for temporarily putting objects together. To make a truly new type, we need a struct.
+
+Structs
+Struct has some advanced functionality, but for this unit we will only cover structs grouping data together.
+For our purposes, a struct is essentially a std::tuple with names for everything. It is a builtin C++ functionality, so you do not even need to include any Standard Library headers. To declare a struct, we write its name followed by a list of all stuff inside it with their types.
+
+Structs
+struct Student{    std::string name;    int mathAL;    int scienceAL;    int englishAL;    int mtAL;};
+
+Structs
+That is the syntax. The struct Student now does completely what std::tuple<std::string, int, int, int, int> from the last unit did. However, this time you actually know what the data inside means. Each entry in the list is called a member property of the struct.
+Note that you need to put a semicolon after the closing curly bracket when declaring structs.
+
+Accessing Properties
+To access properties of the struct, simply write the property name after a dot behind the instance name. We will use the instance below for the remaining unit.
+Student student;student.name = “Tianle”;student.mathAL = 1;student.scienceAL = 1;student.englishAL = 1;student.mtAL = 1;
+
+Accessing Properties
+To get the mathAL of student, simply write student.mathAL, and since it is a property, you can both read from it and write to it.
+int x = student.mathAL; ← reading a propertystudent.mathAL = 2; ← writing a propertystudent.mathAL = 1; ← changing my AL back
+(AL 2 in Math is really bad, 85 - 90 only)
