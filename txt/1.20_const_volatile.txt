@@ -30,3 +30,22 @@ Modifiers with pointers
 const int* ← const applies to int, you cannot write to the memory (the int) that this pointer is pointing to
 int* const ← const applies to * (which means pointer here), the pointer variable itself cannot be modified, so you cannot make it point to another int
 const int* const ← everything locked, cannot modify pointer and also cannot modify the stuff it points to
+
+const int*
+x (variable of type int*)
+0x7A26 (memory address)
+0 (some int)
+const
+
+int* const
+x (variable of type int*)
+0x7A26 (memory address)
+0 (some int)
+const
+
+const int* const
+x (variable of type int*)
+0x7A26 (memory address)
+0 (some int)
+const
+const
