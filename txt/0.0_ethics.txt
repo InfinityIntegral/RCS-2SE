@@ -23,7 +23,7 @@ Gratitude (paying it forwards)
 You are only able to create computer programmes by using the work of programmers before you. You cannot code if you do not have your operating system, the C++ language, the compiler, your IDE, the Internet (to download software), the computer hardware itself, etc…
 You should contribute to the programming community by making your code open source and sharing it on publicly accessible websites such as GitHub.
 
-(Learning / Working) Attitude
+Anti-complacency
 You should make your programme the best possible within your hardware, knowledge, and time constraints. If a programme is meant for public use, test it thoroughly and ensure that it does not lose user data or crash randomly.
 If possible, keep old work that you have done updated with optimisations, bug fixes, and the latest dependencies.
 
