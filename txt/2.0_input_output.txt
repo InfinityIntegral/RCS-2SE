@@ -1,0 +1,51 @@
+Unit 2.0 - Input and Output
+streams, essentially
+
+Streams
+Input and output in C++ is done through streams. Streams are objects that automatically convert stuff to and from strings, allowing you to receive and display numerical values without having to manually make it a string or parse it.
+Streams are from the Standard Library, so remember to include the correct header files before using them.
+
+Fail State
+You should not directly use a stream to receive numeric input without parsing it first, since if the input is invalid, the stream can enter a fail state, which is annoying.
+Only in Informatics Olympiad where the input is guaranteed to be valid, should you directly get numeric input from streams.
+
+Getting Input
+You can use the >> operator to receive input from a input stream by literally injecting it into a variable.
+int i;std::cin >> i; ← looks like injecting it into the variable
+Remember that you can only do this with strings or if you know for sure that the value in the stream is valid.
+
+Sending output
+The << operator is used to send output into a output stream for display. Again, literally inject the variable into the stream.
+int i = 0;std::cout << i; ← looks like injecting into the stream
+This always works for all C++ primitive types. For custom structs, you need to define << which we will learn later.
+
+Stream Pointer
+Streams internally have a pointer. When data is gotten as input or sent as output, the pointer moves to the gap behind the data.
+This ensures that the same data is not processed multiple times. The pointer is moved automatically for you every time << or >> is run and you do not have to worry about it.
+
+Stream Pointer
+Gaps in stream refer to whitespace characters. These include spaces, tabs, and newlines.
+These are used to separate groups of data. This way, 1 2 3 would be read as 3 separate numbers and not 1 block of text. The stream pointer can only land in these gaps when you use << and >>.
+
+Standard Streams
+Include header <iostream> to use standard streams.
+std::cin ← input stream, where your cmd input go
+std::cout ← output stream, send output here to show stuff in the cmd
+std::cerr ← same as std::cout but for errors, it does not use a buffer, this means that error messages can be sent right before the programme crashes
+
+File Streams
+You need the header <fstream> to use file streams.
+std::ifstream provides a input stream linked to a file and std::ofstream provides a output stream linked to a file.
+These streams linked to files can be created using file paths. Make sure the file exists first before using its path to create a std::ifstream.
+
+File Streams
+#include <fstream>std::ifstream inStream(“in.txt”); ← make input streamint i;inStream >> i; ← get input from streamstd::ofstream outStream(“out.txt”); ← make output streamoutStream << i; ← send output to stream
+This assumes in.txt initially contains a integer.
+
+String Streams
+To use string streams, include the header <sstream>.
+Sometimes you want to use a string as a stream because parsing the data yourself or converting stuff to string yourself is annoying.
+This is possible through creating a std::stringstream using a string. String streams can both be input and output depending on your use case.
+
+String Streams
+std::string someString = “”;std::stringstream s1(someString); ← make string streams1 << 1; ← input into string streamsomeString = s1.str(); ← someString is “1” nowstd::stringstream s2(someString); ← another oneint i = 0;s2 >> i; ← now i is 1 also
