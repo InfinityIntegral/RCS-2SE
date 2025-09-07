@@ -1,0 +1,34 @@
+Unit 2.1 - Time Complexity
+counting operations, kind of
+
+Counting Operations
+A computer can do a few billion operations per second.
+That sounds like a lot, but you still cannot use it for some things, for example iterating over all permutations of objects.
+You can estimate how long a programme will take to run depending on the input size. This is expressed as a function of the input size.
+
+Counting Operations
+Most arithmetic operations - constant O(1)
+Loops iterating until n - linear O(n)
+Binary search - O(ln n)You will learn about binary search later
+Sorting - O(n ln n)
+Nesting needs multiplying time complexity
+Note: log n or lg n is same as ln n here
+
+Practice
+We will evaluate the time complexity of my solutions to various questions on Codebreaker.xyz
+
+In 1 second
+time complexity
+maximum n
+O(1)
+infinity
+O(ln n)
+essentially infinity
+O(n)
+10^7
+O(n ln n)
+10^6
+O(n^2)
+10^4
+O(n^3)
+500
