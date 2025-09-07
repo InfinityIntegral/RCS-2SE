@@ -1,0 +1,43 @@
+Unit 2.2 - Binary Search
+O(ln n) searching on sorted arrays
+
+Boundary condition problems
+Binary search is helpful when you have a arraylike data structure and you want to find the boundary of a boundary condition. Note that boundary conditions often concern the size of entries in sorted arrays.
+A boundary condition here refers to a condition false for all elements of the array before the boundary and true for all elements of the array after the boundary.
+
+Example
+What is the first number in an ascending sorted array of int that is more than 26?
+Boundary condition: number more than 26
+Answer: first number after boundary
+Suppose the array has 50 numbers inside, we will call it arr, and assume that the number we are trying to find exists.
+
+Binary Search
+We first initialise the binary search using the possible range of values where the boundary can be.
+int l = 0; ← lower boundint h = 49; ← upper bound
+
+Binary Search
+The boundary is only found when the lower bound and higher bound are adjacent, making the boundary whatever in between them.
+We search until the boundary is found.
+while(h - l > 1){ ← keep going until boundary found    …}
+
+Binary Search
+On each iteration, we split the range into 2 equal parts and determine which part contains the boundary. To do this, we test the index in the middle.
+int m = (l + h) / 2; ← get middle index
+
+Binary Search
+If the boundary condition is true already for the middle index, the boundary must be to its left. Therefore, we only have to search the space between the lower bound and the middle index. We can set the upper bound to the middle index.
+if(arr[m] > 26){h = m;}
+
+Binary Search
+If the boundary condition is still false for the middle index, the boundary must be to its right. Therefore, we only have to search the space between the middle index and the upper bound. We can set the lower bound to the middle index.
+else{l = m;}
+
+Binary Search
+When the loop is done, l and h are 2 integers exactly 1 apart with the boundary between them.
+Since we want the first number after the boundary, the index is h and our answer is arr.at(h).
+The last number before the boundary would be l.
+
+Binary Search Time Complexity
+On each iteration, approximately half of the possible range is eliminated. Therefore, the while loop used in binary search contributes O(ln n) to the total time complexity.
+This is faster than sequentially searching through the array, which would need 1 iteration per term, making it O(n).
+Remember that you can only use binary search if there is a boundary condition and preferably the array is sorted.
