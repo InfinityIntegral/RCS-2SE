@@ -1,0 +1,43 @@
+Unit 2.3 - Prefix Sums
+Adding n stuff in O(1), really?
+
+Dealing with ranges
+Often in programming, especially Informatics Olympiad, you need to know something about a range of data.
+How many forms were submitted between 2 dates?
+How many points did a player get over the last week?
+How many prime numbers are there between 2 indices in an array of integers
+Usually, this is O(n) as you must iterate through the range.
+
+Dealing with ranges, many times
+O(n) is not that bad… right?
+Until you have thousands of queries, when each query is O(n), your programme can get really slow.
+For operations involving addition, multiplication or other similar operations (symmetric and aggregate operations), this can be sped up through precomputation.
+symmetric = order does not matteraggregate = every input matters
+
+Prefix Sums
+Using prefix sums, you only need to iterate once (still O(n) though) through the whole data set.
+After that, every query is O(1). Excellent
+if n = 1000000,10 million queries, O(1) per query: takes 1 second10 million queries, O(n) per query: takes over 3 months
+
+Prefix Sums
+Suppose I want the sum of all data from index a to index b.
+___axxxxxb______= xxxaxxxxxb______ - xxx_____________
+That is just the sum of all data points from 0 to b minus the sum of all data points from 0 to a.
+We compute the sum from 0 to n for all n before actually processing the queries, that is O(n).
+
+Prefix Sums
+For every query, I subtract away the sum from 0 to the start point from the sum from 0 to the end point.
+Since we already know the sums, this is a simple array access operation, that is O(1).
+
+Precomputing
+std::array<int, 10> precomp = {};precomp.at(0) = data.at(0);for(int i=1; i<10; i++){ ← iterate to get all the results	precomp.at(i) = precomp.at(i-1) + data.at(i);
+}
+The array precomp now has all the sums in the form 0 to n and can be used to speed up repeated queries.
+
+Using the precomputed data
+int query(int a, int b){ ← sum from a to b	return (precomp.at(b) - precomp.at(a-1));}
+Note how each query does not run any loops.
+
+Always do this?
+Use prefix sums only when you need to run a large number of queries. Otherwise, iterating through the range is enough.
+If you only need a few queries or if all queries are small and do not overlap, iterating through the range is actually faster than prefix sums.
