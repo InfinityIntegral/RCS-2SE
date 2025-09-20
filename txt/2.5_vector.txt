@@ -1,0 +1,29 @@
+Unit 2.5 - Vectors
+not the math type, and definitely not mosquitoes
+
+Vectors
+A vector is a array that you can resize by adding stuff behind, essentially. It is part of the Standard Library and needs the header <vector> to be included before it can be used.
+Using a vector is very slightly slower than an array, but for most purposes that does not matter.
+
+Vectors
+Getting and setting elements, and getting the size of a vector is identical to doing that for arrays. Except this time, the size is actually helpful.
+When you declare a vector, it always has a size of 0.
+
+std::vector::push_back
+You can use the push_back function to add elements to a vector. This resizes the vector.
+You probably expected this, since an array of size 0 is quite useless.
+std::vector<int> v; ← [], contains nothingv.push_back(26); ← [26], added 26v.push_back(7); ← [26, 7], added 7 behind
+
+std::vector::pop_back
+The pop_back function removes the last element in a vector. Unlike in inferior languages (Python and JS), pop_back does NOT return the last element because that means copying the last element, which can be slow.
+Using the example from before where the std::vector<int> v contains [26, 7],v.pop_back(); ← [26], because 7 is removed
+
+std::vector::back
+You can use the back function to retrieve the last element, just do not use it on an empty vector.
+v.back() is exactly the same as v.at(v.size() - 1)
+There is also v.front() which is equivalent to v.at(0), except it does not even make typing out the code shorter and is completely useless.
+
+std::vector::reserve
+If you are still really concerned with the performance cost of std::vector, the reserve function eliminates that completely.
+v.reserve(maximumPossibleSize);
+This does not change the data in the vector at all. Instead, it changes the underlying memory allocation so that resizing is not necessary when putting more data into the vector.
