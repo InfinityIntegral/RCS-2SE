@@ -1,0 +1,44 @@
+Unit 2.8 - Priority Queue
+Cher, I taught my vector to act like a queue
+
+What vector? What queue?
+A std::priority_queue is essentially a std::vector that kind of sorts itself every time something is inserted.
+Very confusingly, since it is supposed to mimic a queue (and is literally in the header <queue>), the back of the vector becomes the front of the priority queue. We will see later how this makes the comparator the wrong way around.
+
+Kind of sorted?
+From what its name sounds like, the priority queue should be fully sorted. However, sorting means moving a lot of stuff around, which is slow.
+Since we only need the highest priority element, ordering of the remaining stuff do not matter. So priority queue internally uses a heap, which is a special kind of array that takes O(ln n) to find the maximum element using some nice mathematical properties.
+
+a magic queue?
+Priority queues are designed to look like queues, so when using them, in most cases, you can think of them as magically self-sorting queues.
+This means that most queue stuff (excluding back) all work in priority queues. Note that front is renamed to top, and the top function follows the queue, not the underlying vector, so top is the next element to be popped.
+
+Declaring a priority queue
+Firstly, ensure you included the <queue> header.
+For a priority queue containing elements of type T, the type is std::priority_queue<T>, makes sense…
+By default, priority queues use the (a<b) comparator, which means the largest, not smallest, element is in front because the comparators are the wrong way around.
+
+Priority Queue methods
+Priority queues support all queue methods which work exactly as how they work in queues.
+std::priority_queue<int> pq; ← initialised to []pq.push(2); ← contains 2pq.push(1); ← contains 1 and 2, 2 in frontpq.push(3); ← contains 1 and 2 and 3, 3 in frontpq.pop(); ← 1 and 2, frontmost element that 3 is removed
+
+Priority Queue methods
+Since a priority queue must keep itself kind of sorted, insertion and deletion operations are both O(ln n) instead of O(1).
+The extra logarithmic factor comes from the kind of sorting. The proper term for “kind of sorting” is maintaining a heap.
+
+Custom Comparators
+It is annoying, but you can define custom comparators for std::priority_queue. Remember that comparators are the wrong way around, so the last element in the kind of sorted vector is the front of the queue.
+Write the comparator like how you write them for sorting.bool compare(const int& a, const int& b){	return (a > b);}
+
+Custom Comparators
+However, you cannot pass functions into the name of a type. We must declare a struct with a member function operator() that calls our comparator function.
+We have not learnt this yet, but this essentially allows the struct to be used like a function. Struct names are types, which means they can be passed into the type name of a priority queue.
+
+Custom Comparators
+struct Comparator{	bool operator()(const int& a, const int& b){		return compare(a, b); ← make comparison	}}
+An alternative is to write the comparator function directly in the definition of Comparator::operator() which can be more readable if the comparator is simple.
+
+Custom Comparators
+To use the comparator, it must be included in the type of the priority queue. For a priority queue with elements of type T and a comparator struct of Comparator, its type should be
+std::priority_queue<T, std::vector<T>, Comparator>
+Note that the std::vector<T> in the middle means that the priority queue internally maintains a vector.
