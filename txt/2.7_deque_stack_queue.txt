@@ -15,8 +15,8 @@ The index of an element in a deque can change if stuff is inserted or removed at
 Using std::deque::at is correct and efficient, but it kind of looks weird with deques. If you only need the first or last element, use std::deque::front and std::deque::back instead.
 
 Stack and Queue
-If you only need push_back, pop_back, and back, then use a std::stack instead of std::deque.
-Similarly, use a std::queue instead if you need only push_back, pop_front, front, and back.
+If you only need size, push_back, pop_back, and back, then use a std::stack instead of std::deque.
+Similarly, use a std::queue instead if you need only size, push_back, pop_front, front, and back.
 These internally are deques and do not give any performance benefit, but they make your code easier to understand and maintain.
 
 Deque
