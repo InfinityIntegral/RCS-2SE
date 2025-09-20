@@ -1,0 +1,47 @@
+Unit 2.7 - Deques and related data structures
+Arrays got another upgrade
+
+Deque
+A deque, or double ended queue, is like a vector that you can insert and remove from both the front and back.
+All methods that work on vectors, including size, at, push_back, pop_back, front, back, etc work on deques also.
+However note that deques are slower and use more memory than vectors, so if you do not need insertion and deletion from the front, just use a vector.
+
+push_front and pop_front
+std::deque::push_front and std::deque::pop_front do exactly the same as their equivalents for the back of the deque.
+Consider the std::deque<int> v storing [1, 2]v.push_front(3); ← v is now [3, 1, 2]v.push_front(4); ← v is now [4, 3, 1, 2]v.pop_front(); ← v is now [3, 1, 2]
+
+notes about indices
+The index of an element in a deque can change if stuff is inserted or removed at the front.
+Using std::deque::at is correct and efficient, but it kind of looks weird with deques. If you only need the first or last element, use std::deque::front and std::deque::back instead.
+
+Stack and Queue
+If you only need push_back, pop_back, and back, then use a std::stack instead of std::deque.
+Similarly, use a std::queue instead if you need only push_back, pop_front, front, and back.
+These internally are deques and do not give any performance benefit, but they make your code easier to understand and maintain.
+
+Deque
+▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+← out
+out →
+← in
+in →
+not very good for reasoning about the flow of data
+modify by index
+
+Queue
+▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+← out
+← in
+First In First Out
+
+Stack
+▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+out →
+← in
+First In Last Out
