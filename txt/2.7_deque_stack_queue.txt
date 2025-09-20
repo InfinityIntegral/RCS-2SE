@@ -19,6 +19,10 @@ If you only need size, push_back, pop_back, and back, then use a std::stack inst
 Similarly, use a std::queue instead if you need only size, push_back, pop_front, front, and back.
 These internally are deques and do not give any performance benefit, but they make your code easier to understand and maintain.
 
+Stack and Queue
+Note that in stacks and queues, you can only push (insert) and pop (remove) from a fixed end.
+This means that the corresponding functions do not have _back or _front.
+
 Deque
 ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
