@@ -1,0 +1,40 @@
+Unit 2.4 - Recursion and Dynamic Programming
+dynamic programming? more like caching
+
+Recursion
+You can call other functions inside a function.
+int add(int a, int b){	return (a + b); ← calling operator + which is a function}
+But can you call the function that is itself being defined?
+Yes, but be careful with infinite loops. If you do it correctly, it is called recursion. Otherwise it is called a crash.
+
+Recursion
+int factorial(int n){	if(n == 0){return 1;} ← prevent infinite loop	return n * factorial(n - 1); ← call itself}
+Using n! = n x (n-1)!, we wrote an implementation of a factorial that does not use loops. It is still O(n) though.
+
+Recursion
+Consider computing the factorial of 5 using this implementation.
+To get the factorial of 5, we need the factorial of 4, which needs 3 factorial, etc…
+Note how the small factorials are constantly being reused. We can cache them. This means we store them somewhere for use in future operations.
+
+Recursion with cache
+We can do recursion inside another function and use the cache. This makes multiple operations faster since small factorials do not need to be constantly computed. The proper name of this is memoisation.
+int factorial(int n){	if(precomp.at(n) == 0){compute(n);} ← recursion	return precomp.at(n); ← if cached, no need recursion}
+
+Recursion with cache
+void compute(int n){	if(n == 0){precomp.at(0) = 1; return;}	← remember to prevent infinite loops	if(precomp.at(n-1) == 0){compute(n-1);}	← recursion here	precomp.at(n) = n * precomp.at(n-1);}
+
+Stack Overflow
+This is almost perfect…
+Each time you call a function, stuff is added to the stack. If you call too many functions, the stack runs out of space and the programme crashes.
+Crashing is blur -- Cher Tianle
+
+Dynamic Programming
+Instead of recursively calling the compute function to compute more factorials, we compute all the cache needed in a loop from bottom up. This is called dynamic programming.
+for(int i=cacheSize; i<n; i++){	precomp.at(i) = i * precomp.at(i-1);	cacheSize++;}
+
+Practice Questions
+
+Find using dynamic programming
+the nth term in the Fibonacci Sequence
+the nth power of 0.9
+the maximum sum that can be obtained by adding all numbers in a subsequence of a given sequence of numbers
