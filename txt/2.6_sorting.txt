@@ -1,0 +1,42 @@
+Unit 2.6 - Sorting
+SPF manages law, STL manages order
+
+Sorting
+Writing sorting algorithms is annoying.
+So annoying that sorting is provided in the Standard Library under the the <algorithm> header.
+We will learn about sorting on vectors since that is the most common use case (apart from C arrays, which is explicitly excluded from this course).
+
+Ascending Sort
+To sort stuff in an array in ascending order, use the simplest version of std::sort.
+Suppose v is a std::vector<int> containing [2, 1, 3].
+std::sort(v.begin(), v.end());
+Now v contains [1, 2, 3]. Standard Library magic.
+
+Partial sorting
+v.begin() is an iterator which is like a pointer that points to a place in the vector. You can move it by adding the index of where you want it to move to. v.begin() points towards v.at(0) and v.end() is just short for (v.begin() + v.size()).
+std::sort sorts only the part of the vector between the iterators, including the start and excluding the end. If the start is v.begin() and the end is v.end(), it sorts the whole vector.
+
+Partial sorting
+Suppose we want to sort only the 2nd to 4th elements of the std::vector<int> v currently at [3, 2, 5, 1, 4].
+iterator to start: v.begin() + 1iterator to 1 element after end: v.begin() + 4
+std::sort(v.begin() + 1, v.begin() + 4);
+Now v is [3, 1, 2, 5, 4].
+
+Custom Comparators
+If we do not want to sort in ascending order, we must make a custom comparator. This is a function that takes 2 const refs to the stuff in the vector which returns true if the elements are in the correct order and if they are not equal.
+bool compare(const T& a, const T& b);for a vector of type std::vector<T>
+The default comparator is literally (a < b).
+
+Custom Comparators
+When sorting, we can pass the comparator function itself into std::sort as the third argument.
+Consider std::vector<int> v containing [1, 4, 2, 3] and
+bool compare(const int& a, const int& b){return a>b;}
+std::sort(v.begin(), v.end(), compare);
+sorts v in descending order into [4, 3, 2, 1].
+
+Custom Comparators
+All custom comparators must satisfy the following else std::sort may randomly crash
+compare(a, b) true means compare(b, a) false
+compare (a, b) true and compare(b, c) true means compare(a, c) true
+compare (a, a) is always false
+Use (a<b) for ascending and (a>b) for descending sort.
