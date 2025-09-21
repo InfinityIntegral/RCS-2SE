@@ -1,0 +1,88 @@
+Unit 2.9 - Sets and related data structures
+this one is from Mathematics
+
+Sets
+Sets are especially useful for checking if some user input is contained in a predefined group of data.
+To use a set, include the header <set>.
+The type of a set storing elements of type T is std::set<T>.
+Similar to other data structures, you can use std::set::size to get the number of elements in a set
+
+std::set::insert
+You can use std::set::insert to put stuff into a set. Since sets are sorted, this has a time complexity of O(ln n). If the element is already in the set, nothing happens because std::set does not allow duplicates.
+std::set<int> s; ← contains nothing, {}s.insert(1); ← {1}s.insert(2); ← {1, 2}
+
+std::set::erase
+std::set::erase removes stuff from a set. You can remove stuff either by giving the element to remove or an iterator to the element. If there is no such element or the iterator is invalid, nothing happens.
+Consider s being a std::set<int> containing {1, 2},s.erase(1); ← s becomes {2}s.erase(2); ← s becomes {1}
+
+std::set::erase
+If an iterator is provided, the deletion is O(1). We will learn more about iterators later.
+If the element to remove is provided, the deletion is O(ln n) because the location of the element must be found before it can be deleted.
+
+looking for stuff
+std::set::contains, std::set::find, and std::set::count are all used to determine if, where, and how many instances of a element is found in a set. The time complexity for all these is O(ln n).
+std::set::contains - check if set contain elementstd::set::count - count number of elements in set, 0 or 1std::set::find - give iterator to first element found, if none is found, this returns the end iterator
+
+looking for stuff
+Let s be a std::set<int> containing {1, 2, 3}.
+s.contains(1); ← trues.contains(5); ← falses.count(1); ← 1s.count(5); ← 0s.find(1); ← iterator to the element 1s.find(5); ← gives s.end() because nothing is found
+
+Iterators
+Iterators are used to iterate through sets because they cannot be iterated through by index. The type of a iterator to a set with elements of type T is std::set<T>::iterator, and the const iterator is std::set<T>::const_iterator.
+Iterators act like special pointers. They do not have arithmetic, but ++, --, ==, !=, are defined. Note that <, <=, >, >=, +, -, are all missing.
+
+Iterators
+std::set::begin and std::set::end give the start and end iterators, while std::set::cbegin and std::set::cend give the const_iterator equivalents.
+Sets can be iterated over using for loops of the formfor(std::set<T>::iterator i=s.begin(); i!=s.end(); i++)
+orfor(std::set<T>::const_iterator i=s.cbegin(); i!=s.cend(); i++)
+
+Iterators
+Like pointers, iterators can be dereferenced using the * operator. Dereferencing an iterator gives the corresponding element in a set.
+To log everything in a std::set<int> with name s,for(std::set::<int>::const_iterator i=s.cbegin(); i!=s.cend(); i++){ ← iterate over set	std::cout << (*i); ← dereference iterator to get element}
+
+Iterators
+Dereferencing an iterator, like dereferencing pointers, give a reference or const ref to the element in the set.
+This means that you can modify the elements in the set while iterating through them if you use a iterator not a const_iterator.
+If you are not modifying anything, use a const_iterator for better code readability.
+
+Binary Search?
+You cannot do binary search on sets as they do not have accessing element by index, despite being sorted.
+Instead, use std::set::lower_bound to get the first element more than or equal to whatever passed in, and std::set::higher_bound if you want it to be strictly greater.
+These are equivalent to builtin binary search operations.
+
+custom comparators
+You can define custom comparators for sets. First make a Comparator class like what we did while studying std::priority_queue.
+To use that comparator in a set storing elements of type T, let the type of the set be
+std::set<T, Comparator>
+
+Multisets
+Multisets allow duplicate elements, so std::multiset::insert can insert another copy of an element even if 1 is already in the set. Also passing an element to std::multiset::erase would delete all copies of the element, not just the first one.
+std::multiset::find retrieves only the first found element, and std::multiset::count actually counts the number of elements instead of being another name for contains.
+
+Unordered sets
+std::unordered_set is the unordered version of std::set and std::unordered_multiset is the unordered version of std::multiset.
+Instead of comparators, unordered sets require hash functions and the equality operator to be defined for the type of elements stored inside them.
+lower_bound and higher_bound do not work since the sets are not sorted.
+
+The equality operator
+You can define a function taking 2 const refs of your struct and returning if they are equal. It should have signature
+bool isEqual(const MyStruct& a, const MyStruct& b)
+Then in the struct definition, simply add the code block
+bool operator==(const MyStruct& a, const MyStruct& b){	return isEqual(a, b);}
+
+Hash Functions
+The hash function is a function that takes as input a const ref to your struct and outputs a std::size_t, which is a special type of integer.
+Typically, this is done by combining the hashes of the parts of your struct using the bitwise xor operator. C++ builtin types can be hashed using std::hash from the Standard Library.
+
+Hash Functions
+struct MyStruct{	int num;	std::string text;}
+std::size_t hashFunc(const MyStruct& x){	return (std::hash<int>(x.num) ^ std::hash<std::string>(x.text));}
+
+Hash Functions
+Since functions cannot be in type names, we make a struct with operator() defined for the function.
+struct HashFunction{	std::size_t operator()(const MyStruct& x){		return hashFunc(x);	}}
+
+Unordered sets
+With the equality comparator and hash function ready, we can put custom types into unordered sets. The type of the unordered set would be
+std::unordered_set<MyStruct, HashFunction>
+Note that this works for std::unordered_multiset also.
