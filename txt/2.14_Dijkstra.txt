@@ -1,0 +1,79 @@
+Unit 2.14 - Dijkstra Algorithm
+now you know how to get from Sembawang to Sengkang
+
+Breadth First Search?
+We have already learnt BFS and know that it can be used to determine the distance between 2 nodes in a graph (more precisely, distance travelled to go from A to B using the shortest path).
+However, that is only for unweighted graphs, the edges of which all have length 1. What if the graph is weighted?
+
+The Dijkstra Algorithm
+The main difficulty of weighted graphs is that a path with more edges is not necessarily longer. For example, a path containing 3 edges each with weight 0.2 is shorter than a path with 1 edge of weight 1.
+So why not just recompute adjacent nodes when we encounter a shorter path? That is exactly the idea behind the Dijkstra Algorithm.
+
+The Dijkstra Algorithm
+Since the results involving further nodes tend to be easily overwritten, we prioritise nearer nodes. Since we need to know the distance of a node without depending on the output array which is still not finalised, we store the distance along with the node number in a pair.
+To prioritise nearer nodes, we write a custom comparator and use it with a priority queue.
+
+The Dijkstra Algorithm
+This approach sounds unreliable, but it can be mathematically proven that as long as the priority queue comparator ensure that the nearest node is returned first, it is guaranteed that the computed shortest distance is correct.
+However, changing the comparator would break the algorithm. Also, negative weighted edges would get the algorithm stuck in an infinite loop.
+
+Implementation
+We will assume there to be n nodes numbered from 0 to n-1 and all edge weights are floating point numbers.
+We will assume that the adjlist has already been prepared and is a data structure of the form std::vector<std::pair<int, float>>, where adjlist.at(i).at(j).first is a node connected to node i and adjlist.at(i).at(j).second is the weight of the edge from i to adjlist.at(i).at(j).first
+
+Implementation
+Firstly, we make a comparator struct for std::pair<int, float> objects that sorts by descending order of the float variable.
+Remember that priority queue comparators are the wrong way around compared to vector sorting comparators.
+You should be able to do this yourself. Call it Comparator.
+
+Implementation
+We first make the priority queue.
+std::priority_queue<std::pair<int, float>, std::vector<std::pair<int, float>>, Comparator> pq;
+if this looks scary, read it again. It is just a priority queue of std::pair<int, float> with a custom comparator.
+
+Implementation
+Next we set up a vector to hold the distances. Whatever placed into this vector at the end of the algorithm is our list of shortest distances to every node.
+std::vector<float> dist(n, std::numeric_limits<float>::infinity());
+If we do not know how to reach a node, we assume it cannot be reached and set its distance to infinity.
+
+Implementation
+Next we start the operation. The start node obviously has a distance of zero from the start node.
+dist.at(startNodeNumber) = 0.0f;
+We can send the start node into the priority queue to start the algorithm.
+pq.push(std::make_pair(startNodeNumber, 0.0f));
+
+Implementation
+Similar to Breadth First Search, the algorithm keeps running until everything in the priority queue has been processed. When processing something, we remove it from the queue.
+while(pq.size() > 0){	std::pair<int, float> c = pq.top();	pq.pop();}
+
+Implementation
+Stuff in the priority queue can have wrong distance values since the distance values computed when the node was visited may have been overwritten by the results from a shorter path. If the distance is outdated, we ignore the priority queue entry.
+if(c.second > dist.at(c.first)){continue;}
+
+Implementation
+Otherwise we count the node number associated with the priority queue entry as a node with a new shortest path found. We iterate over its adjacent nodes to see if a path through this node would be faster than existing paths to these nodes.
+If a path through this node is shorter, we send the adjacent node’s information into the priority queue for processing.
+
+Implementation
+for(int j=0; j<adjlist.at(c.first).size(); j++){	std::pair<int, float> i = adjlist.at(c.first).at(j);	if(dist.at(i.first) > c.second + i.second){	← if the path through the just updated node is shorter		dist.at(i.first) = c.second + i.second;		pq.push(std::make_pair(i.first, dist.at(i.first)));	}}
+
+Notes about Dijkstra
+
+Once the loop finishes running, reading the dist vector would give the shortest path to any node, not just the destination.
+The time complexity of the Dijkstra Algorithm is O(number of edges x ln (number of nodes)). That can reach O(n^2 ln n) in dense graphs which you typically use Dijkstra for.
+We are not keeping track of which nodes have been visited because that does not matter, we track the distance.
+
+A better Dijkstra?
+If we change the comparator used by the priority queue, the Dijkstra Algorithm is no longer guaranteed to return the distance of the absolutely shortest path.
+However, if you choose the comparator to prioritise likely paths, the computed distance is likely not too far off anyways while speeding up the algorithm significantly. This is the A* algorithm.
+
+A*: an example
+Suppose I am trying to figure out how to get from Yio Chu Kang to Marina Bay by taking the MRT.
+On normal Dijkstra, it prioritises Yishun (2 stations north of Yio Chu Kang), and Bishan (2 stations south of Yio Chu Kang) equally.
+However, it makes no sense to go northwards when your destination is in the south.
+
+A*: an example
+We can modify the comparator so instead of (dist(a) < dist(b)), it uses
+(dist(a) + distToEnd(a) < dist(b) + distToEnd(b))
+Now the algorithm would spend more time exploring southward paths rather than wasting computational power to see if transferring at Woodlands is a good idea.
+This is actually very similar to the algorithm used by Google Maps.
