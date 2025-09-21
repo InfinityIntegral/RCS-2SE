@@ -1,0 +1,46 @@
+Unit 2.10 - Maps and related data structures
+sets, but with an attachment
+
+Maps
+std::map, found in the <map> header, is almost identical to std::set in terms of how it works. However, every element in a map is called a key and has an attached value.
+The key and the value are always stored together, they even share the same iterator. This makes maps very useful for maintaining databases of relations. For example, it can link files to GUIDs.
+
+Maps
+The type of a map with keys of type K and values of type V is std::map<K, V>.
+All sets features apart from insertion and iterator dereferencing work the exact same way in maps. Just remember that instead of passing the desired element, you pass the desired key.
+
+std::map::insert
+std::map::insert is slightly different from std::map::set because you pass a std::pair<const K, V> where const K is the key and V is the value.
+If the key is already in the map, nothing happens. The key in the map does not have its value replaced.
+
+std::map::at
+You can read from and write to a map like with vectors, but using the index as the key.
+This is even better than accessing by index, since the key can be anything, even strings. This is O(ln n) for ordered maps and O(1) for unordered maps.
+However, if the key is not in the map, the app will crash.
+Crashing is blur. -- Cher Tianle
+
+Example
+std::map<std::string, int> s; ← key is string, value is ints.insert(std::make_pair(“hi”, 0)); ← adds key-value pairs.at(“hi”) = 1; ← changes value attached to key “hi” to 1s.at(“hi”); ← reading this now would give 1s.contains(“none”); ← returns falses.contains(“hi”); ← returns trues.erase(“hi”); ← remove key-value pairs.contains(“hi”); ← returns false, key-value pair gone liao
+
+Iterator Dereferencing
+when dereferencing iterators and const_iterators of std::map, you get back a std::pair<const K, V> where K is the key and V is the value.
+That is the only difference.
+Remember to use const_iterator instead of iterator if nothing is being modified.
+
+Multimaps
+std::map does not allow duplicate elements, but std::multimap allows that.
+std::multimap::insert allows insertion of multiple copies of the same key, std::multimap::erase deletes all key-value pairs with matching key if called using key, std::multimap::find gets only the first element and std::multimap::count actually becomes useful.
+
+Unordered maps
+There is also unordered_map and unordered_multimap, but since they are not ordered, lower_bound and upper_bound do not work.
+Also, these would need an equality operator and a hash function for the key.
+
+Custom ordering and hashing
+The procedure for declaring custom comparators for ordered maps and equality operators with hash functions for unordered maps is exactly the same as that for sets.
+Remember that instead of set elements, we always pass map keys, NOT map values. The map primarily sorts by key and 2 elements with the same key are seen as the same even if they have different values attached.
+
+Custom ordering and hashing
+type of map with keys of type K, values of type V, and custom comparator struct Comparator:
+std::map<K, V, Comparator>
+type of map with keys of type K (equality operator included), values of type V, and hash function struct HashFunction:
+std::unordered_map<K, V, HashFunction>
