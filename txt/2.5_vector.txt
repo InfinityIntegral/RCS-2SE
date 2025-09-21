@@ -9,6 +9,16 @@ Vectors
 Getting and setting elements, and getting the size of a vector is identical to doing that for arrays. Except this time, the size is actually helpful.
 When you declare a vector, it always has a size of 0.
 
+Initialising a vector
+When declaring a vector, you can specify its contents either through the array method ({2, 3, 5, 7, 11}) or by using
+std::vector<T>(number_of_copies, initial_element)
+For examplestd::vector<int> s(1000, 0); ← pre allocate 1000 copies of 0std::vector<std::string> t(100, “hi”); ← 100 copies of “hi”
+
+Resetting a vector
+To reset a existing vector with multiple copies of the initial value, use std::vector::assign with the same arguments as if you were declaring it.
+std::vector<int> s(1000, 0); ← 1000 copies of 0s.assign(10, 26); ← 10 copies of 26
+This removes the original content.
+
 std::vector::push_back
 You can use the push_back function to add elements to a vector. This resizes the vector.
 You probably expected this, since an array of size 0 is quite useless.
