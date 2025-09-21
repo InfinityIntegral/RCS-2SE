@@ -1,0 +1,44 @@
+Unit 2.11 - Graphs and Adjlists
+no, not the x y axis one, it is the MRT map one
+
+Graphs
+Graphs have nothing to do with the x y axis things.
+In programming, graphs refer to a set of nodes (also called vertices) connected to each other through edges. Each node can be connected to any other node.
+They are useful for modelling many things such as computer networks, social media friends, and transportation maps.
+
+Graphs
+In this case, the MRT stations are the nodes and the tracks connecting them are the edges.
+
+an example graph
+0
+1
+2
+3
+4
+
+Adjlists
+The relations between nodes are what is interesting about graphs. Essentially that is about the edges.
+To store edge data in a way that the computer can understand, we use a adjacency list (adjlist). If there are n nodes, we index them from 0 to n-1 and the adjlist is a vector of n vectors each keeping track of the index numbers of nodes adjacent to a node.
+
+Adjlist example
+0
+1
+2
+3
+4
+[	[1, 2],	[0, 3, 4],	[0, 3],	[1, 2],	[1]]
+
+A struct for a node?
+If your nodes contain complicated data, you may want to make them structs.
+However even if you do that, to iterate effectively, you still need some form of adjlist, just that the adjlist of each node can be stored inside the node struct itself.
+
+Weighted Edges
+The edges can have weights, which are numbers associated with them.
+The weight can represent importance or distance.
+Note that weights can be negative in contexts where that makes sense.
+If the edges are weighted, you need to store the weight in the adjlist also.
+
+Directed Graphs
+Edges can go in only 1 direction or have different weights in both directions.
+This is very easy to handle in the adjlist, just only register the edge in the direction of the sending node.
+Some situations that involve this include the bus route 806 in Nee Soon East. Since it only has bus services in 1 direction, the bus stops would be connected by directed edges.
