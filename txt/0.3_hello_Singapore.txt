@@ -10,12 +10,16 @@ Integrated Development Environments
 An IDE is a fancy text editor that you use to write code. It does all the normal text editor stuff including find-replace and undo-redo. It also understands your code and can compile it for you.
 Imagine Google Docs, but it is linked to a compiler, and it understands C++. You can even use a custom font such as SingScript.sg
 
+Qt Creator
+For this course, we will use Qt Creator. You can get it from https://www.qt.io/download-qt-installer-oss, run the installer and in the maintenance tool, select ONLY Qt Creator WITHOUT the Qt libraries.
+We will download the Qt libraries later. Also, use the colour configuration from my GitHub to disable Qt Creator’s broken syntax highlighting.
+
 Qt Creator - a warning
 Qt Creator crashes often, so save your work frequently by pressing ctrl + S
 Qt Creator uses Qt’s complicated compilation process so it will not be able to compile your code automatically. It does have a cmd included, so that is convenient for you to write compilation commands yourself.
 
 Hello, Singapore
-With Qt all set up, open a blank text file called test.cpp and copy paste the code below:
+With Qt Creator all set up, open a blank text file called test.cpp and copy paste the code below:
 #include <iostream>int main(){    std::cout << “Hello, Singapore”;}
 
 Compiling the code
