@@ -1,0 +1,131 @@
+Unit 2.12 - Depth First Search
+DFS
+
+Depth First Search
+Depth First Search (DFS) is used when you are really interested in the internal structure of a part of a graph. It iterates through a connected node completely before moving to other nodes
+A nice property of DFS is that for tree graphs, all children of a parent node form a continuous segment in the output vector.
+
+Example
+0
+1
+2
+3
+4
+5
+6
+We start at node 0.
+To visit: (none)
+Visited: (none)
+
+Example
+To visit: 1, 2
+Visited: 0
+0
+1
+2
+3
+4
+5
+6
+
+Example
+To visit: 3, 4, 2
+new nodes are added in front
+
+Visited: 0, 1
+0
+1
+2
+3
+4
+5
+6
+
+Example
+To visit: 4, 2
+Visited: 0, 1, 3
+0
+1
+2
+3
+4
+5
+6
+
+Example
+To visit: 5, 6, 2
+Visited: 0, 1, 3, 4
+0
+1
+2
+3
+4
+5
+6
+
+Example
+To visit: 6, 2
+Visited: 0, 1, 3, 4, 5
+0
+1
+2
+3
+4
+5
+6
+
+Example
+To visit: 2
+Visited: 0, 1, 3, 4, 5, 6
+0
+1
+2
+3
+4
+5
+6
+
+Example
+To visit: (none)
+Visited: 0, 1, 3, 4, 5, 6, 2
+0
+1
+2
+3
+4
+5
+6
+
+Notes about DFS
+The list of nodes to visit resembles a stack. In fact, we will be using a std::stack to keep track of the list of nodes to visit.
+You should keep a list of already visited nodes to search through so that you do not visit the same node twice.
+
+Implementation
+Consider a graph of n nodes with the adjlist in a std::vector<std::vector<int>>.
+we will use a std::set<int> to keep track of visited nodes and a std::stack<int> to keep track of stuff to visit.
+To indicate we reached a node, we output its number. We start from the node 0.
+
+Implementation
+Existing variables:
+int n;std::vector<std::vector<int>> adjlist;std::stack<int> toVisit;std::set<int> visited;
+Note that variable names should not have Singlish, so it is “visited” instead of “visitedLiao”.
+
+Implementation
+We start by specifying that the origin node is 0. That means we visit it first.
+toVisit.push(0);
+then we keep going until everything is visited. This means repeating until the stack of nodes to visit is empty.
+while(toVisit.size() > 0)
+
+Implementation
+For every node we visit, we can mark it as visited. If it is already visited, we remove it from the stack without doing anything else.
+int k = toVisit.top(); ← get next nodetoVisit.pop(); ← remove from stackif(visited.contains(k)){continue;} ← ignore if visitedvisited.insert(k); ← mark as visitedstd::cout << k << “\n”; ← log node number
+
+Implementation
+We ask the algorithm to visit all the connected nodes to k that have not been visited already.
+for(int i=0; i<adjlist.at(k).size(); i++){	if(visited.contains(adjlist.at(k).at(i))) == false){		toVisit.push(adjlist.at(k).at(i));	}}
+Note that each connected node to k is adjlist.at(k).at(i)
+
+Implementation
+When the loop finishes, it means all nodes have been visited and the DFS operation has been completed.
+DFS iterates inside the adjlist, so its time complexity is linear with the number of edges. For trees, this is just O(n).
+You can try another implementation using a vector of bool to keep track of which nodes have been visited, 1 bool per node.
