@@ -1,0 +1,103 @@
+Unit 2.13 - Breadth First Search
+It is called BFS cos it is graphs’ best friend
+
+Breadth First Search
+Breadth First Search is closely related to Depth First Search.
+Instead of searching deep into the children of a node, Breadth First Search (BFS) searches the graph according to distance from parent.
+When searching for some specific element, BFS tend to be faster. Its nice property is that all output elements are in ascending order of distance from parent.
+
+Example
+0
+1
+2
+3
+4
+5
+6
+We start at node 0.
+To visit: (none)
+Visited: (none)
+
+Example
+To visit: 1, 2
+Visited: 0
+0
+1
+2
+3
+4
+5
+6
+
+Example
+To visit: 2, 3, 4
+new nodes are added behind
+
+Visited: 0, 1
+0
+1
+2
+3
+4
+5
+6
+
+Example
+To visit: 3, 4
+Visited: 0, 1, 2
+0
+1
+2
+3
+4
+5
+6
+
+Example
+To visit: 4
+Visited: 0, 1, 2, 3
+0
+1
+2
+3
+4
+5
+6
+
+Example
+To visit: 5, 6
+Visited: 0, 1, 2, 3, 4
+0
+1
+2
+3
+4
+5
+6
+
+Example
+To visit: 6
+Visited: 0, 1, 2, 3, 4, 5
+0
+1
+2
+3
+4
+5
+6
+
+Example
+To visit: (none)
+Visited: 0, 1, 2, 3, 4, 5, 6
+0
+1
+2
+3
+4
+5
+6
+
+Notes about BFS
+The list of nodes to visit is a queue, not a stack this time. In fact, the implementation of BFS is literally identical to DFS except a queue is used instead of a stack.
+You still need to keep track of the visited nodes. This time, try writing your own implementation that uses a std::vector<bool> to keep track of the visited status.
+BFS is O(number of edges), which is O(n) in trees.
