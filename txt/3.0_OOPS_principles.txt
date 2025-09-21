@@ -1,0 +1,56 @@
+Unit 3.0 - Principles of Object-Oriented Programming
+either you do OOPS, or you code goes oops
+
+Object-Oriented Programming
+Object Oriented Programming (OOPS) refers to writing code that uses OOPS principles especially inheritance.
+Typically, OOPS is implemented using classes. Classes are very similar to structs, you will learn more about the differences between classes and structs later.
+There are 2 sets of OOPS principles, PEIA and SOLID.
+
+PEIA Principles
+The PEIA refer to the standard OOPS principles, polymorphism, encapsulation, inheritance, and abstraction.
+Note that PEIA is not a standard acronym, usually people just say OOPS principles, but the acronym makes it easier to remember.
+PEIA = Physical Education Is Annoyingalso = Polymorphism Encapsulation Inheritance Abstraction
+
+Polymorphism
+Polymorphism means that different classes can do different things, but the way to call them can be the same. This is usually implemented using virtual functions which you will learn later.
+For example, a class that renders a triangle and a class that renders a circle can both have a render() function. When render() is called, the thing that appears depend on the actual object.
+
+Encapsulation
+Encapsulation is mainly for library builders (like me) and less relevant to you. It says that the implementation of a class should not let developers see its internal structure to enforce backward compatibility and simplify reasoning about code.
+However, this is often not followed strictly. Projects that do not follow this such as my Project 05524F.sg should document clearly which functions are intended for public use.
+
+Inheritance
+Inheritance means code that can be reused should be reused by putting the reusable code in a parent class and have subclasses inherit it. The effect is like as if you copied the code for every subclass, with some additional bonuses.
+This sounds like nonsense now, but you will learn about it later.
+This is by far the most commonly used OOPS principle.
+
+Abstraction
+Again, this is more for library builders.
+Abstraction means that we should code to simplify the work of other programmers. This means we do not ask them to think about stuff they do not have to think about.
+For example, the Standard Library’s std::deque allows you to use std::stack and std::queue without having to understand the complicated logic behind how deques work.
+
+SOLID Principles
+The SOLID principles are a set of 5 additional principles designed to make OOPS code easier to maintain.
+S ingle responsibilityO pen-closedL iskov substitutionI nterface segregationD ependency inversion
+
+Single Responsibility
+Single responsibility means that 1 component in your code should only do 1 thing. For example, the rendering logic should not be writing stuff to files.
+If that is not followed, you get stupid bugs like how a corrupted Windows File Explorer makes your entire desktop unusable.
+
+Open-Closed
+The open-closed principle means that code should be open to extension and closed to modification.
+This means that if you want new functionality, write new code for it instead of changing existing code. This is because changing existing code can cause bugs in unexpected places and break backward compatibility. Backward compatibility means that upgrading a component should not break your app.
+
+Liskov Substitution
+Liskov substitution essentially means that you should only use inheritance if you intend for the child class to have all functionalities of the parent class.
+In other words, inheritance is not copy paste (#include is copy paste), use it only when you need it.
+If code using the base class has the base class replaced with any subclass, it should still work.
+
+Interface Segregation
+Interface segregation is essentially single responsibility for functions.
+A function should only do 1 thing, do not squeeze unrelated stuff into a function because then you cannot reuse the code somewhere else.
+This is especially important for public use functions in libraries.
+
+Dependency Inversion
+Dependency Inversion means that abstraction should be done properly.
+Once something is abstracted, to use the abstracted class, developers should not need to think about what got abstracted. That is the whole point of abstraction. It should appear like code that magically works.
