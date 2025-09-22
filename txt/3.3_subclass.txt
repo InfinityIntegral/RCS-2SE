@@ -1,0 +1,36 @@
+Unit 3.3 - Subclasses
+inheritance more like copy paste premium version
+
+Inheritance
+Classes can inherit each other.
+The class being inherited from is called the parent class and the class that inherits it is called the subclass.
+All member properties and functions of the parent class are also available in the subclass.
+The syntax isclass Subclass : ParentClass
+
+Inheritance
+class SayHi{	void sayHi();}
+void SayHi::sayHi(){	std::cout << “hi”;}
+Suppose this is our parent class. Parent class can also be called base class.
+
+Inheritance
+class CallUserBlur : public SayHi{	void callUserBlur();}
+void CallUserBlur::callUserBlur(){	std::cout << “You are blur”;}
+Suppose this is our subclass or child class.
+
+Inheritance
+CallUserBlur obj;obj.sayHi();
+This works because CallUserBlur inherits SayHi, so it can use SayHi::sayHi which is a member function of SayHi. Member properties are also inherited similarly.
+Doing the reverse does not work though.
+
+Inheritance Access Modifier
+Note that the declarationclass CallUserBlur : public SayHihas the access modifier public inside.
+If you forget the public access modifier, everything inherited becomes private, which is useless because the whole point of inheritance is to use parent class member properties and member functions.
+
+Casting and subclasses
+You can always use static_cast to cast from a subclass to the parent class safely.
+You can only use static_cast to cast from a parent class to a subclass if the object was originally of that subclass and later got casted into a parent class. If it is not, it is undefined behaviour.
+Undefined behaviour is blur. -- C++ Standard
+
+Casting to subclass
+To ensure that you cast to a subclass safely, you should maintain a member property in the parent class that tells you exactly what subclass the object is.
+Preferably, make this a enum to avoid confusing yourself. The enum can be declared inside the parent class or declared separately depending on needs.
