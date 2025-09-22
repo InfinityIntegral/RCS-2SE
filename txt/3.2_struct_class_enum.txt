@@ -1,0 +1,34 @@
+Unit 3.2 - Struct, Class, Enum
+enum does not belong here actually
+
+Struct and Class
+Structs and classes are technically identical except for 1 difference.
+By default, structs have all member properties and member functions using the public access modifier. Classes have them using private instead.
+Just that difference.
+
+Struct and Class
+In practice, structs are only used for extremely simple stuff and are often used for convenience within a file.
+For anything even slightly complicated, classes are used instead. Typically, each class gets its own file.
+Also, classes tend to have member functions forward declared. Structs tend to not have any member functions.
+
+Enums
+Enums are a special type that kind of behaves like a multiple choice question. There are only that many choices you can choose from.
+Enums are used for situations where only a few inputs make sense. They are very space efficient because internally they use a int to store the information. They tend to be declared inside classes but can be declared inside structs also.
+
+Enums
+class RegionIdentifier{ ← class name	enum Region{ ← enum name		Singapore, ← enum value		SouthEastAsia, ← another enum value		Elsewhere, ← another enum value		Undefined ← another enum value	}}
+
+Enums
+Enums are in this unit because they are also custom types. When using enums, remember to specify the class that they are declared in.
+RegionIdentifier::Region myRegion = RegionIdentifier::Singapore;
+Similar to free functions, you can declare free enums, but pls avoid doing that.
+
+but if enums are like structs…
+The reason you should not declare free enums is because when using them, you do not know what the context is.
+Region myRegion = Singapore;
+This makes sense, but what if you pass the enum to a function? Does the enum value Singapore mean the user’s region settings? nationality? current location?
+
+Enums
+Enums have the operators == and != defined. You can use this to check information.
+if(myRegion == RegionIdentifier::Singapore)
+You can also use enums to indicate the type of a subclass. We will learn more about this later.
