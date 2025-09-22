@@ -1,0 +1,62 @@
+Unit 3.1 - Access Modifiers
+public, protected, I no permission to see the other one
+
+Member Properties
+There is actually a name for the variables you declare inside structs. They are called member properties. They can also be called member variables but we follow Qt style.
+struct Vector{ ← some struct	float x; ← member property	float y; ← member property}
+
+Member Functions
+You can actually declare functions inside structs also.
+struct ImportantMessageSender{ ← a struct	void sendMessage(){ ← a member function		std::cout << “You are blur”;	}}
+These are called member functions. Impostors from Java call them member methods. 
+
+Access Modifiers
+To enforce encapsulation and abstraction, you can ban using some member properties and functions unnecessarily.
+There are 3 access modifiers, public, protected, and private. To use a access modifier, put it above member properties and member functions using it. Remember to have a : not a ; after it.
+Access modifiers should have -1 indentation.
+
+Access Modifiers
+struct ImportantMessageSender{ ← structprotected:	std::string msg; ← protected member propertypublic:	void sendMessage(); ← public member function}
+
+wait cher…
+YOU FORGOT TO DECLARE THE FUNCTION PROPERLY
+Actually, no, that is a forward declaration. A forward declaration tells the compiler that this thing exists without saying how exactly to implement it.
+The missing part is called the implementation which can be written somewhere else. This reduces the amount of #includes, which make compiling faster.
+
+providing implementation
+When providing an implementation, you declare it outside the struct as usual. Since it is a member function, remember to put the struct name in front.
+void ImportantMessageSender::sendMessage(){	std::cout << “Hi blur blur, ” << msg;
+}
+
+providing implementation
+The struct name allows you to use anything in the struct declaration inside the function. It is like as if you used #include for all the stuff inside the struct.
+The :: means that the function is a member of a struct. If a function is not a member of any struct, it is called a free function. All functions that you have been writing so far are free functions.
+
+wait cher…
+YOU CANNOT INCLUDE YOUR OWN FILE
+Actually, #include just copy pastes code. In this case, it copy pastes the struct declaration so you can use it elsewhere.
+From this point onwards, our programmes will span multiple files, so using #include on your own files will become necessary.
+
+Headers vs Source
+The declaration of structs should be placed inside files with the extension .h, these are called headers.
+The implementation should be placed inside files with the extension .cpp, these are called sources.
+You should only #include headers, not sources. Try to keep #include to a minimum. If you are only using references or pointers to a struct, you can even forward declare the struct.
+
+Include Guards
+You can use preprocessor macros to make include guards to ensure each header is only used once.
+Add these before the declarations:#ifndef STRUCT_NAME_ALL_UPPERCASE#define STRUCT_NAME_ALL_UPPERCASE
+and also this after:#endif // STRUCT_NAME_ALL_UPPERCASE
+
+public:
+Back to the topic of access modifiers…
+Public is for member properties and member functions that anything can use.
+Use this for stuff intended for use outside. This is like the input and output of the struct.
+If you do not specify any access modifier, all member properties and functions of structs are public.
+
+protected:
+Protected is for member properties and functions that can only be used in member functions of subclasses. You will learn more about subclasses later.
+Use this for stuff that you do not want random code touching, but you want to allow yourself to extend the struct’s functionality later.
+
+private:
+Private member properties and functions can only be used by other member functions in the same struct. Not even subclasses can touch these.
+This complicates extending the struct’s functionality, so I personally do not recommend using it at all. Use protected: instead.
