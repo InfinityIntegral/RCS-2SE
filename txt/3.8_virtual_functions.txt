@@ -1,0 +1,45 @@
+Unit 3.8 - Virtual Functions
+polymorphism
+
+Virtual Functions
+Virtual functions are instance member functions that you can replace in child classes that inherit from your class.
+The member function that your class defines is called a base implementation. If it is not replaced, the base implementation is run.
+When you call a virtual function, the implementation from the nearest parent class with a reimplementation is run.
+
+Virtual Functions
+To declare a virtual function, put the keyword virtual in front of the function name.
+Internally, before running the virtual function, the implementation to use has to be found first. This makes virtual functions slower.
+Avoid virtual functions if possible. Most of the time they are not necessary if you keep track of subclass types.
+
+Virtual Functions
+class SayHi {public:	virtual void sayHi();};
+void SayHi::sayHi(){	std::cout << “Hi”;}
+The implementation can be replaced in subclasses.
+
+Reimplementing Virtual Functions
+Replacing the implementation of a virtual function is known as reimplementing a virtual function.
+To reimplement a virtual function, declare a function in a subclass with the exact same function signature and add the keyword override at the end of the declaration.
+You can put the new implementation somewhere else.
+
+Reimplementing Virtual Functions
+class HiBlur : public SayHi { ← is subclass of SayHipublic:	void sayHi() override; ← note keyword override};
+void HiBlur::sayHi(){	std::cout << “Hi blur blur”; ← new implementation}
+
+Polymorphism
+SayHi* a = new SayHi();(*a).sayHi(); ← outputs Hi, obviously
+HiBlur* b = new HiBlur();(*b).sayHi(); ← outputs Hi blur blur, obviously
+This can be done without virtual functions… not impressive… The next example is the impressive one.
+
+Polymorphism
+HiBlur* c = new HiBlur();(*static_cast<SayHi*>(c)).sayHi(); ← outputs Hi blur blur
+Although the type of the object is the base class, the implementation from the subclass is used. This is the purpose of virtual functions. This behaviour is called polymorphism.
+
+no need for polymorphism?
+The same behaviour can be achieved by adding a type storing a enum in the base class SayHi.
+The enum will keep track of which subclass the object is. Before running the function, the type is checked and the object is casted to the correct type using static_cast before the function is run. This makes code easier to understand.
+Try to implement this version.
+
+Pure virtual functions
+If you write = 0 at the end of a virtual function declaration, you force all subclasses to reimplement it.
+virtual void sayHi() = 0;
+This is called a pure virtual function. Without reimplementing it, objects of the subclasses cannot be created. Classes with pure virtual functions are called abstract classes.
