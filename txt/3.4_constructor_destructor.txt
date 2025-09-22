@@ -1,0 +1,42 @@
+Unit 3.4 - Constructors, Destructors, and RAII
+only garbage languages use garbage collectors
+
+Constructors and Destructors
+Constructors and destructors are special member functions. A constructor is always called when a object is created and the destructor is always called when a object is deleted from memory. A object is called a instance.
+Usually, constructor allocates memory for complex parts of the instance and the destructor frees that memory. All new keywords in constructors must be paired with a delete keyword in the destructor.
+
+Constructors and Destructors
+For example a class may require a pointer to a std::vector<int>, that can be created in the constructor
+someVector = new std::vector<int>();
+and have its memory freed in the destructor
+delete someVector;
+
+Syntax
+For a class MyClass, the constructor is always MyClass::MyClass(), but inside the class declaration you can omit the MyClass::
+The destructor is always MyClass::~MyClass()
+Constructors can take arguments so there can be stuff in the brackets. Destructors cannot take arguments.
+
+Constructor Arguments
+The arguments of a constructor typically allow you to provide information about the instance.
+class Vector2{	Vector2(float xVal, float yVal); ← constructor	float x; ← member property	float y; ← member property}
+
+Constructor Arguments
+Vector2::Vector2(float xVal, float yVal){	x = xVal;	y = yVal;}
+Like in this case, most of the time, the constructor transfers its arguments into member properties of the class instance.
+
+Multiple Constructors
+There can be multiple constructors, which one you call depending on what you write. By default, the one with no arguments is used.
+std::vector<int> v1;uses std::vector<T>::vector<T>(), and
+std::vector<int> v2(1000, 0);uses std::vector<T>::vector<T>(int count, T content)
+
+Multiple Destructors?
+No, there can only be 1 destructor.
+The destructor is called automatically, so if there were multiple of them, the compiler would not know which one to use. Also the destructor does not take arguments because the compiler does not know what arguments to use.
+
+RAII
+Resource Acquisition Is Initialisation (RAII) is a principle that says an object’s lifetime is linked to how long the memory that holds its data is in use.
+This essentially means calling constructors automatically when creating the object and calling destructors automatically when deleting the object.
+
+RAII
+Without RAII, like in C, you had to call constructors and destructors manually… very annoying… and if you forget, you get a memory leak.
+In inferior languages, there is a garbage collector that randomly activates and deletes stuff. This means you cannot control the deletion of stuff and the garbage collector causes huge amounts of lag.
