@@ -10,6 +10,10 @@ You can actually declare functions inside structs also.
 struct ImportantMessageSender{ ← a struct	void sendMessage(){ ← a member function		std::cout << “You are blur”;	}}
 These are called member functions. Impostors from Java call them member methods. 
 
+Free Functions and Global Variables
+Variables that are not member properties are called global variables. Functions that are not member functions are called free functions.
+Global variables and free functions should be avoided because they cannot be accessed outside the file in which they are declared.
+
 Access Modifiers
 To enforce encapsulation and abstraction, you can ban using some member properties and functions unnecessarily.
 There are 3 access modifiers, public, protected, and private. To use a access modifier, put it above member properties and member functions using it. Remember to have a : not a ; after it.

@@ -1,0 +1,14 @@
+Unit 3.6 - this pointer and instance functions
+I have a pointer to myself
+
+this pointer
+Every instance member function provides access to a pointer called this, which points to the instance.
+In addition to allowing you to pass the instance as argument into other functions, it also lets you reuse variable names, which are very helpful in constructors.
+
+Example
+Vector2::Vector2(float xVal, float yVal){	x = xVal;	y = yVal;}
+Instead of using new variable names xVal and yVal, we can name them x and y also. Then, when referring to the member instance properties, we use (*this).x and (*this).y
+
+Example
+Vector2::Vector2(float x, float y){	(*this).x = x;	(*this).y = y;}
+much neater
