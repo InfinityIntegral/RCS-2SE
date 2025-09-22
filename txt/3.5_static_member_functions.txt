@@ -1,0 +1,26 @@
+Unit 3.5 - Static Member Functions
+when C++ objects learn about we-first society
+
+Instance Members
+Up to now, all the member properties and member functions that we have declared are per instance.
+This means different instances of the same class keep a separate copy of each member property. Changing 1 instance does not affect other instances.
+
+Static Members
+Static member properties are shared across all instances and only 1 copy is kept. All instances can access and modify that copy. This is useful for keeping track of global state.
+To declare a static member property, just add the static keyword in front of the declaration in the class.
+Static properties must be initialised so the compiler knows their default value.
+
+Static Members
+class StaticAccess {public:	static int n; ← a static property}
+int StaticAccess::n = 0; ← initialise it
+All StaticAccess instances share the same copy of n.
+
+Static Members
+StaticAccess a;Static Access b;a.n = 1; ← changes b.n also because same copy
+Since static members do not depend on instance, you can access it directly without any instance.
+StaticAccess::n = 2; ← no instance, only class name
+
+Static Member Functions
+Static Member Functions are functions that can be used without any instance present, like static member properties.
+Any member function of a class that does not use any instance members can be made static.
+Static member functions are helpful for utility classes that will never have a instance.
