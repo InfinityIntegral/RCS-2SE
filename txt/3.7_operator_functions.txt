@@ -1,0 +1,77 @@
+Unit 3.7 - Operator Functions and related functions
+adding 2 vectors
+
+Operator Functions
+You cannot define new operators, however C++ allows you to define operators for your own classes. This means you can use +, -, *, even &, | and ~ on your own classes and they will still work.
+There are 3 types of operators, unary operators, binary operators, and special operators. The next slide will show what you can define for your own classes.
+
+Operator Functions
+Unary operators: +, -, *, &, ~, !
+Binary operators: +, -, *, /, %, ^, &, |, =, <, >, +=, -=, *=, /=, %=, ^=, &=, |=, <<, >>, >>=, <<=, ==, !=, <=, >=, &&, ||
+Special operators: ++, --, (), []
+Note: custom && and || operators do NOT short circuit
+
+Operator Functions
+The function name used in the declaration is simply the word operator in front of the actual operator. Operators are defined like instance member functions.
+Unary operators must not take any arguments, binary operators must take exactly 1 argument which is the thing on the right side of the operator.
+We will see examples in the next slides.
+
+Example
+class Integer {public:	int val;	Integer(int val); ← constructor assigns val to (*this).val}
+We will be defining the unary operator- and binary operator+ for this class that contains a single integer.
+
+Example - unary operators
+Integer Integer::operator-(){ ← unary operator-	return Integer((-1) * val);}
+Note how it takes no arguments.
+Integer Integer::operator+(Integer x){ ← binary operator+	return Integer(val + x.val);}
+Note how it takes an argument.
+
+Operator Functions - guidelines
+When you define operators, keep their meaning as close to the original meaning as possible. For example, do NOT use operator+ for subtraction or operator& for multiplication.
+Most operators especially arithmetic operators and assignment operators should return an instance of the class. Comparison operators should return a bool.
+Since operators are just functions, overloading is possible.
+
+Special operators - ++ and --
+++ and -- are special because they can be either prefixed or postfixed. When prefixed, they return the modified variable. When postfixed, they return the original variable.
+To declare the prefix version, you declare it like any other unary operator. For the postfix version, have a int parameter. The parameter does nothing except for telling the compiler that it is a postfix version.
+
+Special operators - ++ and --
+Integer Integer::operator++(){ ← no parameters	val = val + 1;	return (*this); ← prefix version, return modified}
+Integer Integer::operator++(int){ ← int parameter	val = val + 1;	return Integer(val - 1); ← postfix version, return original}
+
+Special operators - []
+[] does not look like a binary operator, but it follows all binary operator rules.
+The right hand side thing is whatever inside the [].
+Like binary operators, operator[] must take exactly 1 argument.
+
+Special operators - ()
+Declaring operator() makes your class a functor. This means that it can be called (run operator() on) like a function.
+Just like how functions can have any number of parameters, operator() can accept any number of parameters.
+
+Special operators - ()
+void Integer::operator()(const std::string& s){	std::cout << “Hi blur blur, the number is”;	std::cout << val;	std::cout << “, also, ” << s;}
+Note how the () is repeated in the declaration, once for the operator name and once to indicate the parameters.
+
+Friend Functions
+Binary operators force the class instance to be on the left hand side. To have the other thing on the left and the class instance on the right (int + Integer), they do not work.
+You must use a friend function for this.
+Friend functions are not member functions and is bad practice. You should never use them apart from in this situation.
+
+Friend Functions
+To declare a friend function, you simply declare a free function and add the friend keyword in front of it. The friend function must be declared inside your class definition.
+friend Integer operator*(int x, Integer thisObj);
+Remember that friend functions are still free functions and so they are not inherited.
+
+Custom Casting
+You can declare your own casting rules for your classes that work with static_cast also.
+To cast something else into your class, simply declare a constructor that takes exactly 1 argument of the corresponding type.
+For example, for int → Integer casting, we can useInteger::Integer(int val);
+
+Custom Casting
+To cast your class into another type, you must define an operator with name as the other type. The operator keyword with a class name tells the compiler that it is a type casting function, so you do not need to state the return type.
+int Integer::operator int(); ← wrongInteger::operator int(); ← correct
+You still have to let your function actually return the int.
+
+Custom Casting
+Inside header, inside Integer class definition:operator int(); ← forward declaration
+Inside implementation:Integer::operator int(){ ← no saying return type	return val; ← still must return}
