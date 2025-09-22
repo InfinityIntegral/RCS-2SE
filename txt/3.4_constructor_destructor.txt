@@ -18,7 +18,7 @@ Constructors can take arguments so there can be stuff in the brackets. Destructo
 
 Constructor Arguments
 The arguments of a constructor typically allow you to provide information about the instance.
-class Vector2{	Vector2(float xVal, float yVal); ← constructor	float x; ← member property	float y; ← member property}
+class Vector2{public:	Vector2(float xVal, float yVal); ← constructor	float x; ← member property	float y; ← member property}
 
 Constructor Arguments
 Vector2::Vector2(float xVal, float yVal){	x = xVal;	y = yVal;}
