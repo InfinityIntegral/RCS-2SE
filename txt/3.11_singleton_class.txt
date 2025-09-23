@@ -1,0 +1,14 @@
+Unit 3.11 - Singleton Class
+only 1 copy… or is there?
+
+Singleton Class
+A static functions class can be used to group functions that are for sure not related to any instance.
+However if the functions and variables are related to some kind of object, it is better to let them be instance members. This way, it will be much easier to create more copies of that instance later.
+
+Singleton Class
+For example, properties and functions controlling the size of a note window for a note taking app may make sense to be set static since only 1 note is open at a time.
+However, if they are implemented as a singleton, you can easily have 2 notes open side by side if you ever add that feature later. You should still have a static variable to track the active window though.
+
+Singleton Class
+Since singletons may be duplicated in future, you should implement them as full classes.
+This means that they must have constructors, destructors if appropriate, and instance members.
