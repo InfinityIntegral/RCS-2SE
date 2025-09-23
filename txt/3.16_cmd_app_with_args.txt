@@ -1,0 +1,25 @@
+Unit 3.16 - Writing CLI apps that take arguments
+app.exe be_not_blur
+
+CLI apps
+Command Line Interface (CLI) apps are apps that do not display a window. Instead they run inside the cmd or terminal. Apps that display a window are called GUI (Graphical User Interface) apps.
+CLI apps are easier to code but harder to use than GUI apps.
+What you have been building are technically already CLI apps, but this lesson we will look at CLI arguments.
+
+Entry Point
+The entry point of an application is the function automatically run when you run the app.
+For CLI arguments not accepting arguments, like what we have been working with so far, this is just int main().
+To accept arguments, you need the entry pointint main(int argc, char* argv[])
+
+Entry Point
+In int main(int argc, char* argv[]),
+argc: number of argumentsargv: C array of C strings that store the arguments.
+Obviously, we do not like that.
+std::vector<std::string> args(argv, argv + argc);gives a std::vector of std::string containing all the arguments.
+
+Entry Point
+You can then use the args vector in your application.
+The first argument is always the name of the application. Everything after that is whatever the user input in the cmd.
+app.exe testing arguments 1 2 3
+[“app.exe”, “testing”, “arguments”, “1”, “2”, “3”]
+Note that arguments are ALWAYS strings even if they represent numbers.
