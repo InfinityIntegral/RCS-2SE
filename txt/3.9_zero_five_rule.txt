@@ -1,0 +1,23 @@
+Unit 3.9 - Zero or Five Rule
+Change all of them or change none of them
+
+Destructors
+As we have learnt, destructors are run when objects are deleted to free up the memory.
+If some class has a destructor defined, it probably manages resources, so the compiler asks you to be really careful with the resources by defining 4 other things, the copy constructor, move constructor, copy assignment operator, and move assignment operator.
+
+The other 4
+For a class MyClass,
+copy constructor: MyClass(const MyClass&)copy assignment: MyClass& operator=(const MyClass&)move constructor: MyClass(MyClass&&)move assignment: MyClass& operator=(MyClass&&)
+These are usually defined automatically for you, but the automatic ones do not take into account the destructor.
+
+Deleting the other 4
+Since the automatically defined versions cannot see the destructor, using them may cause memory leaks because the resources may not be transferred over correctly.
+If your class is complicated enough to require a custom destructor, it is likely always passed as pointers and would never need any of these 4. Therefore, we can delete these. To delete these, simply add = delete behind the declarations.
+
+Deleting the other 4
+class MyClass {	MyClass(const MyClass&) = delete;	MyClass& operator=(const MyClass&) = delete;	MyClass(MyClass&&) = delete;	MyClass& operator=(MyClass&&) = delete;};
+Now compiler will not complain.
+
+Zero or five rule
+You only need to delete these 4 if you defined a custom destructor. Otherwise do not touch them at all.
+For simple classes and structs especially those just holding data, you likely need the copy assignment and the copy constructor without realising it.
