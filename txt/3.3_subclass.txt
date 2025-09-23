@@ -5,15 +5,15 @@ Inheritance
 Classes can inherit each other.
 The class being inherited from is called the parent class and the class that inherits it is called the subclass.
 All member properties and functions of the parent class are also available in the subclass.
-The syntax isclass Subclass : ParentClass
+The syntax isclass Subclass : public ParentClass
 
 Inheritance
-class SayHi{	void sayHi();}
+class SayHi{	void sayHi();};
 void SayHi::sayHi(){	std::cout << “hi”;}
 Suppose this is our parent class. Parent class can also be called base class.
 
 Inheritance
-class CallUserBlur : public SayHi{	void callUserBlur();}
+class CallUserBlur : public SayHi{	void callUserBlur();};
 void CallUserBlur::callUserBlur(){	std::cout << “You are blur”;}
 Suppose this is our subclass or child class.
 
@@ -34,3 +34,30 @@ Undefined behaviour is blur. -- C++ Standard
 Casting to subclass
 To ensure that you cast to a subclass safely, you should maintain a member property in the parent class that tells you exactly what subclass the object is.
 Preferably, make this a enum to avoid confusing yourself. The enum can be declared inside the parent class or declared separately depending on needs.
+
+Multiple Inheritance
+You can actually inherit from multiple classes.
+All these classes become parent classes of the subclass and you can safely static_cast between the subclass and any parent class. Just make sure that the parent classes do not define the exact same thing, else the compiler will complain.
+In the subclass declaration, remember to put the public access modifier in front of the names of all parent classes.
+
+Multiple Inheritance
+class A { ← first parent classpublic:	void a();};
+class B { ← second parent classpublic:	void b();};
+
+Multiple Inheritance
+class C : public A, public B { ← child classpublic:	void c();};
+C obj = C();
+C inherits both A and B, so obj.a(), obj.b(), and obj.c() all work.
+
+The Diamond Problem
+Suppose now that both A and B are subclasses of X which has a function X::x.
+class A : public X								Xclass B : public X							A		Bclass C : public A, public B					C
+C gets 2 copies of X::x, so the compiler will complain about it. This time you cannot just rename the function.
+
+Virtual Inheritance
+The easiest way to resolve the Diamond Problem is to either make A or B not inherit from X. Do this as much as possible.
+If they absolutely have to inherit from X, then you must make them inherit X virtually. This makes A, B, and C all slower slightly but you have no other choice.
+
+Virtual Inheritance
+class A : virtual public Xclass B : virtual public Xclass C : public A, public B
+The virtual keyword tells the compiler that only 1 copy of X can be included. This also means that you have to find where the code of A and B is before running it, which is why virtual inheritance is slightly slower.
