@@ -1,0 +1,32 @@
+Unit 3.14 - Outdated Features
+do not use these, but others’ code might use them
+
+Outdated Features
+C++ was first made in 1979, less than 15 years after Singapore’s independence. Yes, it is that old. C, which is what C++ is based on, was made in 1972 (SG 7).
+The language has been improving, but some code still use old outdated features. You should not use these features, but you have to understand them to use old code.
+We will cover C arrays, C strings, and operator[].
+
+C arrays
+C arrays are declared as arrays and used as pointers.
+When declaring, you have something likeint x[5]; ← array of 5 ints
+However when passing it to functions, you pass it as a int*, the pointer to the first element (index 0). This means you do not know the size of the array received. Instead of C arrays, we now have std::array and std::vector.
+
+converting from C arrays
+When you get a int*, float*, or some other pointer from old code that is supposedly a array, you must convert it before using it. Suppose you call the pointer arr and its length n, and the array contains stuff of type T.
+std::vector<T> v(arr, arr + n);
+This provides a std::vector containing the array data which you can use.
+
+converting to C arrays
+To convert a std::array or std::vector, we call it v, to a C array to pass to old code, we use std::array::data or std::vector::data.
+v.data(); ← gives C array
+Remember to use std::array::size and std::vector::size to pass the size of the array separately.
+
+C strings
+C strings are C arrays of chars. Old code typically pass them as char*, we can call it c. Nowadays we use std::string.
+To convert it to a std::string, usestd::string s(c); ← s contains the data of c
+To convert a std::string back into a C string,s.c_str(); ← gives a C string
+
+operator[]
+To access elements of arrays, vectors, and maps, we now have std::array::at, std::vector::at, and std::map::at.
+Back then, there was no at function, instead they use operator[]. The argument of at goes between the [].
+Using at is better because accessing out of bounds will crash instead of being undefined behaviour. Do not use operator[], but you should understand what it does in old code.
