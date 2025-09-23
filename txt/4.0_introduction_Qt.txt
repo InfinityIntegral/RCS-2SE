@@ -1,0 +1,166 @@
+Unit 4.0 - Introduction to Qt
+we are all Qties now (Qties is a official Qt term)
+
+What is Qt?
+Qt (pronounced as “cute”) is a app development framework used to… build apps, obviously.
+All 05524F technologies including SGEXTN are based on Qt.
+The Qt Libraries add much more features to the Standard Library, such as (mostly) better strings.
+We will not cover Qt GUI since we will be using SGEXTN for that.
+
+Downloading the Qt libraries
+Enter the Qt Maintenance tool which you already have and choose “add component”.
+Under build tools, choose a compiler. For Windows, use the latest version of LLVM-MinGW.
+Under Qt, choose the latest version of the Qt Libraries that matches your compiler. As of SG 60, this is Qt 6.9.2, do not install old versions or anything else.
+
+Documentation Reading
+Qt is huge, really really huge.
+Obviously I cannot cover everything in Qt. So you have to be able to read documentation so you can figure everything out.
+We will be learning to read Qt style documentation. SGEXTN documentation style is almost identical. Other documentation may differ but are not too different.
+Go to https://doc.qt.io/qt-6/qwidget.html 
+
+Documentation Reading
+First note that the page is really long. And it has a lot of links. This is because Qt has a lot of stuff, especially inside QObject which is the most important class in Qt.
+Obviously you cannot scroll through and read it all, so we pick only the parts that we need.
+Typically, there is 1 page per class. The official C++ references have 1 page per function.
+
+Basic info
+The top of the page has the basic information about the class, including the class name, headers, inheritance information, and a short description.
+
+Basic info
+The basic information tells you if the class is relevant to you.
+Also, sometimes you know the class exists and how to use it, but you forgot the header name. You can check that in the basic information section also.
+
+Detailed info
+In Qt style documentation (Qt and SGEXTN), there is a separate section below about how to use the class and its intended use case. This is placed inside the basic info section as a link inside text (Qt) or right below the basic info section as a separate link (SGEXTN).
+Qt:
+SGEXTN:
+
+Members List
+In Qt style documentation (Qt and SGEXTN), there is a link to a list of all members of the class. This way, when trying to use a inherited member, you do not have to search through everything the class inherits from.
+Qt:
+SGEXTN:
+
+Contents List
+The contents list is a list of everything in the class. These are often group into types (instance properties, instance functions, static properties, static functions, enums, etc).
+This follows right after the basic info and the links.
+
+Contents List
+Everything in the contents list should be a link. This link would take you directly to the section of the website below where detailed information about the member is provided.
+Try clicking on some links in the contents page to see where they go.
+In the C++ references, these links take you to a dedicated page for each function.
+
+Detailed info
+This section comes right after the contents list. It contains detailed information about how to use this class, the intended use case, and precautions about using it.
+Only Qt style documentation have this section.
+
+Contents info
+The remaining, extremely long part of the documentation page is the contents info. This section contains detailed descriptions of every member, and also their use cases and associated precautions.
+
+Contents info
+You should never need to manually scroll through the contents info to find something.
+Instead, clicking links in the contents list should bring you to the appropriate member here.
+
+DLL Linking
+Libraries such as Qt and SGEXTN (version 6.0.0 and above) are split into 2 parts, headers and DLLs.
+Headers, like the headers that you have been writing, contain forward declarations without implementation.
+The implementation is in source files. Library authors compile these into DLLs which the linker can use.
+
+DLL Linking
+Normally, your source files are processed by the compiler then given to the linker, so you do not need DLLs.
+When you use a external library, you must make the headers and DLLs accessible to the compiler and linker respectively. This involves writing many compilation commands, which is extremely annoying…
+So annoying that Qt build a tool to automate it.  
+
+QMake
+QMake is a tool built by Qt to automate writing these annoying compilation commands.
+The QMake tool uses a .pro file, which contains information about how to generate compile commands. QMake then run these commands for you automatically.
+To make things even simpler,QMake can be used in literally 1 click →
+
+.pro file
+A .pro file is a collection of QMake variables that each take multiple space separated values, like cmd arguments.
+To change a variable VARIABLE, you must use += to add arguments and -= to remove default arguments. DO NOT USE = because that may delete essential default arguments.
+Each variable should be on a new line but you can use \ to merge lines in the .pro file.
+
+TARGET
+The TARGET variable keeps the name of your application.
+This can be different from the project name.
+DO NOT put special characters here such as spaces, quotation marks, full stops, or Chinese words. If these should be in the application name, SGEXTN gives a separate place to put it.
+Use = not += to assign this.
+
+TEMPLATE
+The TEMPLATE variable can be set to either app or lib.
+Use lib when building libraries and app when building CLI or GUI application.
+Use = not += to assign this.
+
+Semantic Versioning
+All software have versions. This starts from 1.0.0 as the first version. The 3 numbers are called major, minor, and patch versions. Increment any of them resets everything behind to 0.
+Increment patch version for bug fixes, minor version for minor changes and adding features, major version for significant changes.
+
+VER
+QMake supports semantic versioning.
+Put the major version in VER_MAJ, minor version in VER_MIN, and patch version in VER_PAT.
+Use = not += to assign this.
+
+FILES
+HEADERS and SOURCES manage the headers and sources of your project respectively. This should not contain headers from imported libraries or any DLLs.
+DISTFILES are other files that are not used by the code but should be received by users. This can include usage instructions in the form of a README, or licenses.
+RESOURCES contain Qt resource files which we will learn more about later in this lesson.
+
+FILES
+These variables are lists of space separated file paths managed automatically by Qt Creator.
+As long as you use the Qt Creator builtin way to make new files which will be shown later this lesson, you should not need to touch these.
+You may have to manually add the license and README to DISTFILES if you created them before the .pro
+
+CONFIG
+The CONFIG variable allows you to enable certain configurations.
+You should add warn_on to ensure the compiler complains about any potential mistakes, stl to access the Standard Library, and c++latest to ensure you get all C++ features.
+You should also add cmdline when building CLI apps and shared when building libraries.
+
+DEFINES
+The DEFINES variable lets you write #define for the compiler.
+Putting stuff here is equivalent to putting all the #define at the start of every file.
+You can use this to include code based on platform if writing platform specific code.
+
+INCLUDEPATH
+You can put the paths to folders containing external library headers here.
+Placing them here ensures that when you use #include with <> instead of “”, it will work.
+
+LIBS
+This variable maintains a list of file paths to external library DLLs and makes them accessible to the linker.
+
+QMAKE_FLAGS
+QMAKE_CXXFLAGS maintain compiler flags and QMAKE_LFLAGS maintain linker flags. Use these below for optimisation. You can add more if you are very sure that you need them.
+QMAKE_CXXFLAGS_RELEASE -= -O2QMAKE_CXXFLAGS_RELEASE += -O3 -flto -ffunction-sections -fdata-sectionsQMAKE_LFLAGS += -flto -Wl,--gc-sections
+
+Qt Resource System
+An application should contain everything in its subfolder packaged… right? Yes, until a random blur blur put secret company documents in the same folder and now every user can see the boss’ personal phone number.
+To prevent such nonsense, Qt uses a resource system to ensure you only put what the app needs into the app.
+
+Qt Resource System
+Resources that a app needs can include fonts and images.
+These should be placed in .qrc files. To create a .qrc, useFile > New File… > Qt > Qt Resource File > Choose…
+You can then open it and select files on your computer to put inside. Preferably keep everything that should be inside in the project folder. Note that adding fonts only make it possible to load them and does not load them automatically.
+
+Creating Source Files
+Similar to .qrc files, headers (.h) and sources (.cpp) including main.cpp should be created inside Qt Creator for them to be registered properly in the .pro file.
+Standalone sources (you should only have 1 of these, that is main.cpp) can be created viaFile > New File… > C/C++ > C/C++ Source File > Choose…
+
+Creating Source Files
+Note that this creates files in the project root folder.
+If you want files in a subfolder, right click the folder in the Qt Creator file system view (can be accessed by clicking the title of the Open Documents tab and choosing File System from the drop down list) and select Add File…, that will give you the same interface as File > New File…
+
+Creating Classes
+To create a class with its header and source, useFile > New File… > C/C++ > C/C++ Class > Choose…
+After that, enter the CASE SENSITIVE class name and directly press Next, do not change any other settings.
+The created header will give you a basic class declaration with include guards. The source will give you the declaration of the constructor which you can delete.
+
+Creating Text Files
+Sometimes you want text files inside your project folder for apps to read from. These can contain user instructions or be a configuration file for your app.
+To create one, useFile > New File… > General > Empty File > Choose…
+
+Registering Files
+All files created using Qt Creator will be added to the .pro automatically.
+Header files are added to HEADERS, source files are added to SOURCES, Qt Resource files (.qrc) are added to RESOURCES, and text files are added to DISTFILES.
+You do not have to worry about this.
+
+Practice using Qt Creator
+Start a Qt Project “Hello_Singapore”- write a class with 1 static member function that prints “Hello, Singapore” to std::cout- write the entry point of the application- set up the .pro appropriately- use Run Mode (the bottom left green triangle button) to compile and run the app
