@@ -1,0 +1,28 @@
+Unit 3.13 - Template Programming with Structs
+same idea as functions
+
+Template Programming
+As we learnt in the last lesson, template programming allows the compiler to generate code based on what you put. In effect, this is essentially like having variable types.
+You can have multiple template parameters, and they do not even have to be types.
+In this lesson, we will focus less on templates but more on using them with structs.
+
+Template Programming with Structs
+class Vector2 {public:	int x;	int y;};
+This works, but what if we want floats inside? maybe int for x and float for y? maybe a 3D vector? 4D? 5D? 26D?
+
+Template with 1 type parameter
+template<typename T>class Vector2 {public:	T x; ← type depend on parameter	T y; ← type depend on parameter};
+Using it: Vector2<int>, Vector2<float> etc
+
+Template with multiple parameters
+template<typename T1, typename T2>class Vector2 {public:	T1 x; ← type depend on parameter 1	T2 y; ← type depend on parameter 2};
+Using it: Vector2<int, float>, note that the order matters
+
+Template with non type parameters
+template<typename T, int N>class VectorN {public:	std::array<T, N> data; ← length depend on template};
+Using it: VectorN<int, 2>, VectorN<float, 4>, etc
+
+Templates in the STL
+You may have notices these really look like the declarations of Standard Library stuff.
+std::vector<int>, std::pair<int, float>, std::array<int, 5> etc
+This is because the Standard Library internally use a huge amount of templates to provide its functionality. In fact, the full name of STL is actually Standard Template Library.
