@@ -46,6 +46,10 @@ The declaration of structs should be placed inside files with the extension .h, 
 The implementation should be placed inside files with the extension .cpp, these are called sources.
 You should only #include headers, not sources. Try to keep #include to a minimum. If you are only using references or pointers to a struct, you can even forward declare the struct.
 
+Compilation commands
+Up to now we have been usingg++ -o app.exe app.cppto compile our applications, where app.cpp is the file containing main().
+With multiple files, all sources files must be inside the command.g++ -o app.exe app.cpp someclass.cpp anotherclass.cpp
+
 Include Guards
 You can use preprocessor macros to make include guards to ensure each header is only used once.
 Add these before the declarations:#ifndef STRUCT_NAME_ALL_UPPERCASE#define STRUCT_NAME_ALL_UPPERCASE
