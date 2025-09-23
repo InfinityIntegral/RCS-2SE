@@ -1,0 +1,11 @@
+Unit 3.10 - The Static Function Class Pattern
+no instance members? not a problem
+
+Static Function Class
+Very often you have a group of related functions and variables that do not really belong in a class, but you put them all in a class anyways for code organisation.
+All these members can then be made static. Since there is no instance members, you never need to create instances.
+You can delete the default constructor of the class.
+
+Static Function Class
+Static function classes can be used to contain utility functions used during computation, or to contain global app settings.
+To delete the constructor:MyStaticFunctionClass() = delete;
