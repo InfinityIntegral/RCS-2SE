@@ -1,0 +1,30 @@
+Unit 3.15 - Explicitly Excluded
+pls do not use these
+
+Explicitly Excluded
+This lesson contains information about stuff explicitly excluded from my course.
+You will not need them anywhere, not even to interface with old code. However still know them because other people may write code that use these and you need to be able to understand these.
+
+Smart Pointers
+Smart pointers are std::unique_ptr and std::shared_ptr.
+These behave like normal pointers except they delete their stuff upon going out of scope. The issue is that this can mess up stuff if you want the stuff to be deleted later.
+To manage smart pointers, you need to think in Rust concepts, which is far too complicated and annoying, and it is not even C++.
+
+operator->
+Suppose x is a pointer to a object of type X, or x is a X*, and there is a function X::func().
+You would call it with (*x).func();but you can also do x->func();
+I do not recommend operator-> and did not teach it because I want you to think in terms of pointers, and understand very clearly that pointers must be dereferenced before use.
+
+dynamic_cast
+Casting from a parent class to a subclass is only ok if the parent class object was initially from that subclass.
+However dynamic_cast can be used to try casting it, and it returns nullptr if the parent class object is not actually from that subclass, causing the cast to fail.
+I prefer to keep track of the subclass type using a enum because it is clearer and you may need the enum elsewhere.
+
+Namespaces
+You can declare a namespace to group unrelated methods together, but I prefer static function classes because namespaces do not show in the Qt Creator class hierarchy.
+Also using namespaces can mess up indentation, making your code less readable.
+
+auto
+By far the one I hate the most, auto lets you skip writing types, instead letting the compiler guess the type.
+I very much discourage the use of auto because I want you to think in terms of types.
+Using auto is no different from using inferior languages that do not have types.
