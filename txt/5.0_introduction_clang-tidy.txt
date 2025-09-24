@@ -1,0 +1,28 @@
+Unit 5.0 - Introduction to clang-tidy
+we are all blur sometimes
+
+clang-tidy
+No one writes perfect code. Not me, not the people who built Qt, not the people who built Windows…
+clang-tidy is a automated tool that looks through your code to find common bugs and inefficient implementations. Obviously, it is very not perfect, but it is better than nothing.
+You should scan all your code through clang-tidy before releasing it.
+
+clang-tidy configs
+clang-tidy has a list of features that look for different things. These range from common bugs, to memory leaks, to performance optimisations, to readability issues.
+For every project, you can write a .clang-tidy file to indicate which ones you are using. But Qt Creator allows you to apply a global list.
+
+clang-tidy in Qt Creator
+Go to Edit > Preferences > Analyser > Clang Tools
+Disable “Analyse Open Files”, that causes a lot of lagEnable “Build the project before analysis”
+Then click on the button to the right of “Diagnostic configuration:”
+In the pop up window, click “Copy…” on the top right and name your own configs settings.
+
+clang-tidy in Qt Creator
+Then click on the “Clang-Tidy Checks” tab below.
+Here you see a list of all checks currently being applied. Click the “*” option twice to disable everything.
+Then download config/clang_tidy_filter.txt from my GitHub.
+Scroll through the list and select everything in that file. This will take quite some time but it only has to be done once. CLICK OK AFTER YOU ARE DONE TO SAVE.
+
+Using clang-tidy
+To analyse project, first ensure you have it open.
+Then go to Analyse > Clang-Tidy, select all the files you want analysed and click “Analyse” in the bottom right.
+This should show a new tab above the cmd. After it finishes, you can see the issues it found and fix them. You MUST analyse everything before publishing any code.
