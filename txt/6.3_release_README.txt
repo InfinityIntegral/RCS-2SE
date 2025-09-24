@@ -1,0 +1,36 @@
+Unit 6.3 - Release README
+not really a README, but still Markdown
+
+Releases
+When your software is ready to be used, you should make a release. You can click the “Releases” section at the right side of the repository page and then select “Draft a new release”.
+From there, when picking a tag, create a new tag with the semantic version number (something like v1.0.0).
+
+Releases
+Notice how the releases page has these 3 things
+title
+a big textbox
+“attach binaries”
+The title should be the name of your software with the version number. You can upload a ZIP file of compiled, ready to use code in the “attach binaries” section.
+
+Release README
+Inside that big textbox is where you write Markdown code for your release README.
+This is technically not called a README, but its functionality is the same as a README and same as READMEs, it uses Markdown.
+
+Release README
+A release README generally has an about section and a changelogs section.
+Note that in the release README, you do not have the project name with version number, that is in the title.
+Also do not write descriptions of the project, that belongs in the project README.
+
+Release README about section
+The about section should be a short paragraph describing what changed in this release.
+This should give users an idea of how this release differs from the previous one. You can briefly mention added features and fixed bugs.
+
+Release README changelogs
+The changelogs should at minimum mention what got added, what got changed, and what got removed.
+You can have 3 sub sections, added, changed, and removed.
+If you want to give more details, you can do it in the about section or have a longer changelog.
+The changelog of the first release should have everything built under “added”.
+
+Writing a release
+Using what you learnt, write a release for your Hello, Singapore app.
+This will be a source code only release so you will not need to attach any binaries. Building, packaging, and releasing binaries will be taught later. 
