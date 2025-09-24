@@ -1,0 +1,17 @@
+Unit 5.1 - NOLINT
+everyone is blur sometimes, including clang-tidy
+
+clang-tidy false positives
+clang-tidy sometimes give false positives. If you used my set of configs, false positives should be kept to a minimum, but they still can occur.
+To resolve them, write a NOLINT comment on the line where clang-tidy found the supposed issue.
+
+NOLINT
+clang-tidy knows that it is blur and give false positives, so it scans comments for NOLINT directives.
+single line comments can contain the word NOLINT followed by brackets containing the name of a clang-tidy check. When clang-tidy see this, it removes that check for that line. You can have other stuff in the same comment
+You can have multiple NOLINT directives in 1 line.
+
+NOLINT Example
+// NOLINT(misc-no-recursion) NOLINT(misc-include-cleaner)
+This comment disables misc-no-recursion and misc-include-cleaner for the line that it is found on.
+When copy pasting external code, you may want to block all clang-tidy checks on a line using
+// NOLINT because this code is external
