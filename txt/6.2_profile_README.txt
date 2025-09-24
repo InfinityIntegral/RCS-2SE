@@ -1,0 +1,41 @@
+Unit 6.2 - Profile README
+use this to show off and be kiasu
+
+GitHub profile
+Go to github.com/YourUsername , that is your GitHub profile.
+When other programmers want to find out more about you and your projects, they will go to your GitHub profile. So obviously you want to make it look nice.
+Profile READMEs have a different format from project READMEs.
+
+Profile repository
+First make a empty repository with the exact same name as your username, that is your profile repository.
+Get it set up and create its README. This README is your profile README and will be shown when people go to your profile page. Remember to keep it updated as you build more projects.
+For an example, look at my one atgithub.com/InfinityIntegral 
+
+Parts of a profile README
+You can make your one really fancy or use a different structure, but typically GitHub profile READMEs follow this structure:
+introduction
+languages and tools
+projects
+
+Profile introduction
+The first part of the README is your introduction. This should be a short paragraph about yourself, what you code, and the projects you build.
+If you really really want to show off something, you can link it here. That is why my GitHub profile starts with the Singapore flag emoji, followed by a song that leads up to links to SGEXTN.
+
+Profile languages and tools section
+The next section of your profile README should be on what technologies you want to use. This can be a bullet point list or you can use emojis as bullet points instead.
+All of you can put C++ here. After completing the course you will be able to add SGEXTN.
+If you really want to, you can add QMake, Git, clang-tidy etc here… but these are not that impressive.
+(still more impressive than 10000 JS frameworks no one use)
+
+Profile projects section
+The last part of your profile should be a list of projects that you have done and a short description for each one. You should provide links to the project repositories and indicate if each project is work in progress or completed.
+Only include impressive projects here. If you do not have any, put whatever you have. Something not so impressive is better than nothing.
+
+Pinned projects
+The pinned projects section allows you to put links to your projects. You should put your favourite 6 projects here.
+To edit it, click the “customise your pins” link and choose the projects that you want pinned in order.
+
+Write your own GitHub profile
+Using what you learnt, write your own GitHub profile.
+You do not have anything impressive yet, so just use the Hello, Singapore app for now.
+At the end of the course, you will be making at least 1 impressive project.
