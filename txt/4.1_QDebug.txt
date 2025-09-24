@@ -1,18 +1,0 @@
-Unit 4.1 - QDebug
-std::cout for Qt
-
-QDebug
-QDebug is essentially the std::cout equivalent for Qt.
-Instead of printing output into the cmd, QDebug prints output into a dedicated “Application Output” panel in Qt Creator so you can view it more easily.
-QDebug also formats your output, such as by inserting quotations, spaces, and newlines as appropriate.
-
-QDebug
-Instead of using << into std::cout, you use qDebug(). Remember to include the <QDebug> header first though.
-std::cout << 1 << “ ” << 2 << “ ” << 3;qDebug() << 1 << 2 << 3;
-These do the same thing, but note how the QDebug version is shorter because no formatting is needed.
-
-use of QDebug in debugging
-QDebug is very helpful in debugging.
-You can write qDebug() << statements on every line, outputting various values to see what is going wrong.
-You can also detect where crashes occur by seeing when QDebug stops printing.
-Remember to delete the QDebug statements after debugging.
