@@ -1,0 +1,108 @@
+Unit 6.0 - Introduction to Git, GitHub, and Open Source
+so let’s be the light, and make our world glow brighter
+(from Be the Light, MOE song in 2020)
+
+Backing up code
+Suppose if your computer breaks or needs a software reset, then do you lose all your programming work?
+To avoid that, we need backups of code elsewhere. Google Drive sounds like a good option, except you need to manually upload the whole project after every change which is annoying. Git and GitHub allow easy uploads while allowing you to revert and share changes easy.
+
+Version Control
+The main point of Git is actually reverting changes that you regret making. Only when connected to GitHub does it become a backup option.
+We will focus on Git first.
+I will only cover basic Git usage, for anything more advanced, go to https://learngitbranching.js.org/ 
+
+Downloading Git
+Go to https://git-scm.com/downloads to download Git.
+When installing, choose these settings:
+override default branch name, use “main”
+use Git and optional Unix tools…
+use bundled OpenSSH
+Checkout as is, commit Unix style line endings
+use default console window
+git pull only ever fast forward
+
+Creating a GitHub repository
+Projects on GitHub are stored in repositories, not projects. GitHub Projects is something completely unrelated.
+Log in to your account (create one if you do not have) and make a new repository. Write a repository name and a short description for it. Make sure that the repository configurations are set to public, and the README, gitignore, and license are all off.
+
+Creating a Git folder
+After the repository is created, make a new folder and open cmd in that folder. Run the command
+git clone https://github.com/YourUsername/YourRepositoryName.git .
+This sets up Git in that folder, imports everything from GitHub (which is nothing as of now), and links the folder to the GitHub repository.
+
+4 areas of Git
+We will think of your changes as individual objects and a file is just a lot of changes added together.
+Changes can be in 4 areas of Git.
+unstaged
+staged
+local
+remote
+
+Unstaged
+Changes in the unstaged area are changes that have not been registered with Git. When you write or edit code, the changes produced always end up here.
+
+Staged
+You can run git add . in the Git folder to move all changes there from unstaged to staged.
+The staged area contains changes that have been registered with Git but have not been written into the repository’s history yet.
+
+Local
+Running git commit -m “your commit message” in the Git folder sends all changes in staged to local.
+Now the changes are in the history of your repository and you can revert to the current state of your repository in future at any time. Doing this is called making a commit.
+The commit message should describe what the changes are about. You should keep it short and do not use Singlish.
+
+Remote
+git push sends all the changes from local to remote, which is GitHub. This backs up all your changes and you can view your code from GitHub.
+
+git pull
+Before you start working, if you have made changes elsewhere (from another computer or GitHub web), you must use git pull to send all the additional changes from remote to local.
+Forgetting to do this BEFORE MAKING ANY NEW CHANGES can break your code without you knowing. As much as possible, only edit changes on 1 computer.
+
+git restore
+If you made some changes and realised you broke your code entirely, you can use git restore . to delete all these changes and revert to the last time you wrote a commit.
+This allows you to do any nonsense safely without worrying about permanently damaging your project.
+
+git reset
+git reset can be used with --soft, --mixed, or --hard to undo the last commit you made.
+git reset --soft removes the last commit and moves all changes from local to staged. git reset --mixed removes the last commit and moves all changes from local to unstaged. git reset --hard moves the whole project back by 1 commit, losing all changes in the last commit.
+Remember to git push after using git reset.
+
+Diagram of git areas and commands
+staged
+unstaged
+local
+remote
+git add .
+git commit-m
+git push
+DELETED
+git restore .
+git reset--soft
+git pull
+git reset --hard
+git reset --mixed
+
+gitignore
+Every project should have a .gitignore which has a list of files that Git should not care about. This differs based on language, framework, compilation process, and IDE used.
+For projects based on Qt or SGEXTN, written in Qt Creator, and using QMake, use the config/git_ignore.txt file on my GitHub. Remember to rename it to .gitignore
+
+Note about these explanations
+Everything you learnt in this lesson is simplified a lot to help with understanding. If you want a full understanding of Git, go to https://learngitbranching.js.org/
+What I taught this lesson is enough to use Git and GitHub to manage your personal projects.
+
+Open Source Initiative
+The Open Source Initiative is a global movement to share software free of cost to help others code. 05524F.sg fully support the Open Source Initiative.
+Open source software such as SGEXTN have source code freely available, mostly on GitHub. They can be used as long as you follow the terms in the licenses. You should also join the movement by publishing your code on GitHub.
+
+Copyleft Licensing
+Copyleft licensing allows you to freely distribute original versions of software. However, you typically must credit the author in your project README and license. If you modify the source code and build your own version, you typically must release the source code.
+Common copyleft licenses are LGPL, AGPL, and GPL. Non copyleft open source licenses include MIT and Apache.
+
+Following licensing terms
+For more information about a specific license and how to use software using that license appropriately in your project, you can read through the license yourself and ask ChatGPT.
+If you accidentally violate license terms, the author of the software would send you a email to ask you to correct it. You just have to follow the instructions. 
+
+Choosing a license
+You are recommended to use
+LGPL for libraries that you want other people to use
+AGPL for apps that depend heavily on the Internet or have a lot of Internet related features or provide a web API
+GPL for most applications and libraries
