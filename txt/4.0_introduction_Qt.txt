@@ -164,3 +164,13 @@ You do not have to worry about this.
 
 Practice using Qt Creator
 Start a Qt Project “Hello_Singapore”- write a class with 1 static member function that prints “Hello, Singapore” to std::cout- write the entry point of the application- set up the .pro appropriately- use Run Mode (the bottom left green triangle button) to compile and run the app
+
+We are actually not Qties…
+
+SGEXTN
+SGEXTN (version 6.0.0 and above) is my own framework that wraps Qt completely. This means you will never have to touch Qt in any way.
+Qt has a lot of annoying things like signal-slot, metaobject properties, etc that increase processing time significantly for clang-tidy and increases compilation time. SGEXTN is much closer to generic C++. Programming using SGEXTN allows you to get the full C++ experience.
+
+SGEXTN with QMake
+QMake is just a build system and Qt Creator is just a IDE. If you use appropriate settings, you can use these with any C++ project.
+The settings that I provided are designed to work with any C++ projects, including SGEXTN ones.
