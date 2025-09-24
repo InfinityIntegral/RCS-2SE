@@ -12,7 +12,11 @@ Imagine Google Docs, but it is linked to a compiler, and it understands C++. You
 
 Qt Creator
 For this course, we will use Qt Creator. You can get it from https://www.qt.io/download-qt-installer-oss, run the installer and in the maintenance tool, select ONLY Qt Creator WITHOUT the Qt libraries.
-We will download the Qt libraries later. Also, use the colour configuration from my GitHub to disable Qt Creator’s broken syntax highlighting.
+We will download the Qt libraries later. Also, use the colour configuration (configs/qt_creator_colour.xml) from my GitHub to disable Qt Creator’s broken syntax highlighting.
+
+Qt Creator
+To set the syntax highlighting, go toFile > Edit > Preferences > Text Editor > Font & Coloursthen press the “Import…” button and choose the file.
+Also go to File > Edit > Preferences > Text Editor > Behaviour > File Encodings > Default line endings and choose “Unix (LF)”
 
 Qt Creator - a warning
 Qt Creator crashes often, so save your work frequently by pressing ctrl + S
