@@ -1,0 +1,104 @@
+Unit 6.1 - Project README
+a project without a README is blur, literally not clear
+
+README
+A README (pronounced as “read me”) is a document that gives information about something. In this case, it is a software project.
+READMEs are essentially for informing people what a project does, the problem it solves, and how to use the software.
+You must have it on GitHub. If you want, you can have a separate version on a website.
+
+Markdown
+Markdown (.md) files contain text that is kind of formatted. These support links, images, section headers, bullet point lists, and check box lists.
+Both GitHub and Qt Creator support READMEs.
+To create a Markdown file in Qt Creator, useFile > New File… > General > Markdown File > Choose…
+For a README, the file name must be README.md
+
+Paragraphs in md
+Markdown paragraphs must be separated by 2 lines. This means that you must press the enter key twice before starting a new paragraph.
+There is no special formatting about paragraphs. Note that the gap between paragraphs is huge for readability.
+
+Line break in md
+If you want something on a new line but does not want huge paragraph spaces, instead of pressing enter, type <br>.
+This only works on GitHub, so you will not be able to see it when previewing in Qt Creator.
+
+Section headers in md
+To make something a section header, put # in front of the line. Put ## if you want a slightly smaller one, ### if you want a even smaller one, etc.
+The name of your project should be a # header
+# name of project## section in README### sub section in README
+
+Code blocks in md
+Your README may tell users what code need to be run to use your application.
+To write code in Markdown, surround the code in 2 `s or backticks.
+If you want multiple lines of code or syntax highlighting, use a multiline code block. See next slide for the format.
+
+Code blocks in md
+```cpp ← language name, cpp means C++SomeClass::initialise();SomeClass::someFunction();```
+Remember to put the correct language name.C++ - cppQMake (Qt .pro file stuff) - qmakecmd commands - bash (Windows) or sh (MacOS / Linux)
+
+Bullet point lists in md
+You can write a bullet point list by putting “- ” (with the space) in front of every element in the list.
+To have them indented further right, put tabs (1 tab = 4 spaces) in front of points that you want to indent.
+Bullet point lists (and checkboxes lists on the next slide) can contain links.
+
+Checkbox lists in md
+You can write “- [ ] ” in front of elements to indicate a empty checkbox and “- [x] ” in front of elements to indicate a full checkbox.
+To indent elements further right, put tabs in front of them.
+Checkbox lists are commonly used for feature lists in READMEs. Use empty checkboxes to mark features that have not been completed yet and full checkboxes for completed features.
+
+Links in md
+Use the format[text to display](https://your.website/URL)
+Instead of a website link, you can link to another part of the README. All section headers have tags which is the section header name all lowercase and with spaces replaced with -
+[some section](#section-in-readme) links to the header## Section In README
+
+Images in md
+To display a image, use![](https://link.to/your.image)
+To link images from your repository, give ChatGPT the link to the image on GitHub and ask it to generate the link that you should use in the README, it is NOT the same link.
+You are strongly recommended to bring images into your repository before adding them, or avoid images altogether.
+
+Parts of a README
+Your README should contain the following parts
+project name and about section
+contents (only if README is long)
+details (optional: motivation, documentation, demo…)
+how to use
+features list
+credits
+contributing and contact (optional)
+
+README introduction
+The first line of your GitHub project README must be a # followed by the name of your project.
+After that, you should have a ## header with a short paragraph describing what your project is about. Make this concise and clear.
+
+README contents section
+If your README is long, you can add a contents section immediately below the about section so viewers do not have to scroll as much.
+In the contents section, have links pointing to other parts of your README.
+
+README details section
+If you want to add more details such as why you built the project, where to find documentation (for libraries) and a demo version, you can add a details section.
+The details section can contain as many section headers (##, ##, or even ####) as you want.
+Usually, if you have a details section, it is best to have a contents section because your README will be long.
+
+README usage instructions
+Your README need to tell the user how to download, install, and start using your application.
+For mobile apps, you can tell them that it is on Google Play, App Store, etc and provide relevant links.
+For libraries, usage instructions can be quite long and can include code.
+This should be a separate section from the details section.
+
+README feature list
+You should have a list of completed features and work in progress features in your README. This tells viewers what your project have to offer and what to expect in future.
+You can use a checkboxes list for this. Remember to label here which version of your project is latest.
+This should be its own section.
+
+README credits section
+Here you give credits to the software that is packaged in or distributed with your application.
+Typically, this includes Qt and SGEXTN.
+In addition to mentioning the name of these tools, you should provide links to their websites.
+
+README contacts section
+In the contacts section, you can provide your email for people who want to build on your work or report bugs to contact you.
+If you do not want to maintain the project, you can leave out this section.
+
+Practise README writing
+Find the Hello, Singapore project that you built in unit 4.0 and do the following:
+run it through clang-tidy and fix any issues found
+set up a GitHub repository for it
+write a project README for it
